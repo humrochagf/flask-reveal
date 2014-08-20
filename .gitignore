@@ -1,0 +1,2 @@
+*.pyc
+flask_reveal/static/*
