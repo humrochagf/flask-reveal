@@ -1,57 +1,28 @@
 # -*- coding: utf-8 -*-
+from os import path
 
-import glob
+from flask import Flask
 
-from flask import Flask, render_template
-
-
-server = Flask(__name__)
+from .blueprints.reveal import reveal_blueprint
 
 
-def load_slides():
-    """
-    Search the slide pages in the current directory, loading them in
-    alphabetical order as a list of strings.
+def create_app(config_filename=None):
+    instance_path = path.abspath(path.curdir)
+    app = Flask('flask_reveal',
+                instance_path=instance_path,
+                instance_relative_config=True)
 
-    The slide pages must be on markdown format having ".md" extension
-    """
+    # load default config
+    app.config.from_object('flask_reveal.settings')
+    app.config['MEDIA_ROOT'] = path.join(instance_path, 'img')
 
-    slides = []
+    # load custom config
+    try:
+        app.config.from_pyfile('config.cfg')
+    except FileNotFoundError:
+        print('Configuration file "config.cfg" not found on current directory!')
+        print('Loading slides without custom configurations...')
 
-    for file in glob.glob('*.md'):
-        with open(file, 'r') as sb:
-            slides.append(sb.read())
+    app.register_blueprint(reveal_blueprint)
 
-    return slides
-
-
-def load_meta():
-    """
-    Load the meta content
-
-    TODO: Make them read from a external config file
-    """
-
-    meta = {
-        'title': 'The title',
-        'author': 'Some Author',
-        'description': 'Some description'
-    }
-
-    return meta
-
-
-@server.route("/")
-def presentation():
-    """
-    View responsible to render the presentation
-
-    TODO: Add style configuration
-    """
-
-    context = {
-        'meta': load_meta(),
-        'slides': load_slides()
-    }
-
-    return render_template('presentation.html', **context)
+    return app
