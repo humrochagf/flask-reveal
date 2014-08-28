@@ -1,27 +1,11 @@
 # -*- coding: utf-8 -*-
-import glob
-
+from _pickle import load
 from flask import Blueprint, render_template, current_app
+
+from .utils import load_markdown_slides
 
 
 reveal_blueprint = Blueprint('reveal', __name__)
-
-
-def load_slides():
-    """
-    Search the slide pages in the current directory, loading them in
-    alphabetical order as a list of strings.
-
-    The slide pages must be on markdown format having ".md" extension
-    """
-
-    slides = []
-
-    for file in glob.glob('*.md'):
-        with open(file, 'r') as sb:
-            slides.append(sb.read())
-
-    return slides
 
 
 @reveal_blueprint.route("/")
@@ -34,7 +18,7 @@ def presentation():
 
     context = {
         'meta': current_app.config['META'],
-        'slides': load_slides()
+        'slides': load_markdown_slides()
     }
 
     return render_template('presentation.html', **context)
