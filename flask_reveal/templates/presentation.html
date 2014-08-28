@@ -48,11 +48,10 @@
                 {% for slide in slides %}
                 <section data-markdown>
                     <script type="text/template">
-                        {{ slide }}
+                        {{ slide|safe }}
                     </script>
                 </section>
                 {% endfor %}
-
             </div>
 
         </div>
