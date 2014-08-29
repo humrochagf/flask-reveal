@@ -37,7 +37,7 @@ REVEAL_CONFIG = {
     'touch': True,
 
     # Loop the presentation
-    'loop': True,
+    'loop': False,
 
     # Change the presentation direction to be RTL
     'rtl': False,
