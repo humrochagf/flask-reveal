@@ -65,11 +65,16 @@
             // https://github.com/hakimel/reveal.js#configuration
             Reveal.initialize({
                 {% for config_name, value in config.items() %}
-                    {{ config_name }}: {{ value }},
+                    {% if value == true %}
+                        {{ config_name }}: true,
+                    {% elif value == false %}
+                        {{ config_name }}: false,
+                    {% elif value is number %}
+                        {{ config_name }}: {{ value }},
+                    {% else %}
+                        {{ config_name }}: '{{ value }}',
+                    {% endif %}
                 {% endfor %}
-
-                theme: Reveal.getQueryHash().theme || '{{ theme.theme }}', // available themes are in /css/theme
-                transition: Reveal.getQueryHash().transition || '{{ theme.transition }}', // default/cube/page/concave/zoom/linear/fade/none
 
                 // Optional libraries used to extend on reveal.js
                 dependencies: [

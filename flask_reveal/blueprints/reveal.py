@@ -30,7 +30,6 @@ def presentation():
         'meta': current_app.config.get('REVEAL_META'),
         'slides': load_markdown_slides(),
         'config': current_app.config.get('REVEAL_CONFIG'),
-        'theme': current_app.config.get('REVEAL_THEME'),
     }
     
     return render_template('presentation.html', **context)
