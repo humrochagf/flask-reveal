@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask_reveal.app import create_app
 
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 REVEAL_META = {
     'title': 'The title',
     'author': 'Some Author',
