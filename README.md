@@ -18,7 +18,7 @@ The configuration file are placed on the presentation root folder and is respons
 
 This file is optional and can the values above can be changed:
 
-- **REVEAL_META**: python dictionary with metadata from the presentation
+**REVEAL_META**: python dictionary with metadata from the presentation
 
 ```python
 REVEAL_META = {
@@ -32,7 +32,7 @@ REVEAL_META = {
     'description': 'Some description'
 }
 ```
-- **REVEAL_CONFIG**: python dictionary with the [reveal.js configuration attributes](https://github.com/hakimel/reveal.js/#configuration) but using python types (e.g.: true is python boolean True)
+**REVEAL_CONFIG**: python dictionary with the [reveal.js configuration attributes](https://github.com/hakimel/reveal.js/#configuration) but using python types (e.g.: true is python boolean True)
 
 ```python
 REVEAL_CONFIG = {
