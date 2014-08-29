@@ -15,7 +15,7 @@ def create_app():
     app.config['CURRENT_DIR'] = current_dir
     app.config['MEDIA_ROOT'] = path.join(current_dir, 'img')
 
-    app.config.from_object('flask_reveal.settings')
+    app.config.from_object('flask_reveal.config')
 
     # load custom config
     try:
