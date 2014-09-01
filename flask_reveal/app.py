@@ -6,8 +6,8 @@ from flask import Flask
 from .blueprints.reveal import reveal_blueprint
 
 
-def create_app():
-    current_dir = path.abspath(path.curdir)
+def create_app(dir):
+    current_dir = path.abspath(dir)
 
     app = Flask('flask_reveal')
 
