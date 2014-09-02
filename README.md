@@ -2,6 +2,13 @@
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
+## Requirements
+
+ - Python 3
+ - Flask
+ - reveal.js
+ - docopt
+
 ## Usage
 
 On the first use, you need to setup the reveal.js files with the project. To make that, just run the following command:
