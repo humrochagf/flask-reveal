@@ -2,6 +2,24 @@
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
+## Usage
+
+On the first use, you need to setup the reveal.js files with the project. To make that, just run the following command:
+
+```
+python run.py installreveal (-f | --file FILE)
+```
+
+Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
+
+To start your presentation run:
+
+```
+python run.py start [-d | –debug] [-p | –path PATH]
+```
+
+Running without the `PATH` information, it will do the presentation files lookup inside the current directory.
+
 ## Presentation Setup
 
 The flask-reveal checks for three things on your presentation folder.
@@ -120,10 +138,6 @@ All images used on your presentation are placed inside the **'img'** folder and 
 ```markdown
 ![Python Logo](img/python.png)
 ```
-
-## Usage
-
-Just call the flask_reveal.py from the slides folder to load the presentation.
 
 ## Markdown
 

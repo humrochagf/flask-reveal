@@ -3,13 +3,13 @@
 
 Usage:
     run.py start [-d | --debug] [-p | --path PATH]
-    run.py installreveal [-f | --file FILE]
+    run.py installreveal (-f | --file FILE)
     run.py (-h | --help)
 
 Options:
     -d --debug          Start flask with debug mode on.
     -p --path PATH      Presentation directory [default: ./].
-    -f --file FILE      Reveal.js tar.gz file.
+    -f --file FILE      Reveal.js .tar.gz or .zip release file.
     -h --help           Show this help.
 
 '''
