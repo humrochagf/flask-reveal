@@ -2,11 +2,11 @@
 """flask-reveal
 
 Usage:
-    run.py start [-d | --debug] [-p | --path PATH]
-    run.py installreveal
-    run.py installreveal -f FILE
-    run.py installreveal -u URL
-    run.py -h | --help
+    flaskreveal start [-d | --debug] [-p | --path PATH]
+    flaskreveal installreveal
+    flaskreveal installreveal -f FILE
+    flaskreveal installreveal -u URL
+    flaskreveal -h | --help
 
 Options:
     -d --debug              Start flask with debug mode on.
