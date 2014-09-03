@@ -2,7 +2,8 @@
 """flask-reveal
 
 Usage:
-    flaskreveal start [-d | --debug] [-p | --path PATH]
+    flaskreveal start [-d | --debug]
+    flaskreveal start [-d | --debug] PATH
     flaskreveal installreveal
     flaskreveal installreveal -f FILE
     flaskreveal installreveal -u URL
@@ -10,7 +11,6 @@ Usage:
 
 Options:
     -d --debug              Start flask with debug mode on.
-    -p PATH --path=PATH     Presentation directory [default: ./].
     -f FILE --file=FILE     Reveal.js .tar.gz or .zip release file.
     -u URL --url=URL        Url of reveal.js .tar.gz or .zip release file.
     -h --help               Show this help.
@@ -126,14 +126,21 @@ if __name__ == '__main__':
     arguments = docopt(__doc__)
 
     if arguments['start']:
-        start(arguments['--path'][0], arguments['--debug'])
+        path, debug = arguments['PATH'], arguments['--debug']
+
+        if path:
+            start(path, debug)
+        else:
+            start('./', debug)
     elif arguments['installreveal']:
-        if arguments['--file']:
+        file, url = arguments['--file'], arguments['--url']
+
+        if file:
             print('Installing reveal.js from file...')
-            install_reveal_from_file(arguments['--file'][0])
-        elif arguments['--url']:
+            install_reveal_from_file(file)
+        elif url:
             print('Installing reveal.js from web...')
-            install_from_web(arguments.get('--url'))
+            install_from_web(url)
         else:
             print('Installing reveal.js from default url...')
             install_from_web('https://github.com/hakimel/reveal.js/archive/2.6.2.tar.gz')
