@@ -14,7 +14,19 @@
 On the first use, you need to setup the reveal.js files with the project. To make that, just run the following command:
 
 ```
-python run.py installreveal (-f | --file FILE)
+python flaskreveal.py installreveal
+```
+
+It will download reveal.js from a default **url** and make the install. If you want to set the **url** by yourself:
+
+```
+python flaskreveal.py installreveal -u URL
+```
+
+If you already have the reveal.js file:
+
+```
+python flaskreveal.py installreveal -f FILE
 ```
 
 Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
@@ -22,7 +34,7 @@ Where the `FILE` can be either the **.tar.gz** or the **.zip** release file foun
 To start your presentation run:
 
 ```
-python run.py start [-d | –debug] [-p | –path PATH]
+python flaskreveal.py start [-d | --debug] [PATH]
 ```
 
 Running without the `PATH` information, it will do the presentation files lookup inside the current directory.
