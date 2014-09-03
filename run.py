@@ -3,20 +3,24 @@
 
 Usage:
     run.py start [-d | --debug] [-p | --path PATH]
-    run.py installreveal (-f | --file FILE)
-    run.py (-h | --help)
+    run.py installreveal
+    run.py installreveal -f FILE
+    run.py installreveal -u URL
+    run.py -h | --help
 
 Options:
-    -d --debug          Start flask with debug mode on.
-    -p --path PATH      Presentation directory [default: ./].
-    -f --file FILE      Reveal.js .tar.gz or .zip release file.
-    -h --help           Show this help.
+    -d --debug              Start flask with debug mode on.
+    -p PATH --path=PATH     Presentation directory [default: ./].
+    -f FILE --file=FILE     Reveal.js .tar.gz or .zip release file.
+    -u URL --url=URL        Url of reveal.js .tar.gz or .zip release file.
+    -h --help               Show this help.
 
 """
 
 import os
 import shutil
 import tarfile
+import urllib
 import zipfile
 
 from docopt import docopt
@@ -97,10 +101,39 @@ def install_reveal_from_file(file):
     else:
         print('This is not a valid file')
 
+
+def install_from_web(url):
+    """
+    Installs reveal.js from a given url
+
+    :param url: url of a reveal.js release file
+    """
+
+    response = None
+
+    try:
+        response = urllib.request.urlretrieve(url)
+    except urllib.error.HTTPError as e:
+        print('Error while trying to get reveal.js file:\n  {0}'.format(e))
+    except ValueError as e:
+        print('Value Error:\n  {0}'.format(e))
+
+    if response:
+        install_reveal_from_file(response[0])
+
+
 if __name__ == '__main__':
     arguments = docopt(__doc__)
 
     if arguments['start']:
         start(arguments['--path'][0], arguments['--debug'])
     elif arguments['installreveal']:
-        install_reveal_from_file(arguments['--file'][0])
+        if arguments['--file']:
+            print('Installing reveal.js from file...')
+            install_reveal_from_file(arguments['--file'][0])
+        elif arguments['--url']:
+            print('Installing reveal.js from web...')
+            install_from_web(arguments.get('--url'))
+        else:
+            print('Installing reveal.js from default url...')
+            install_from_web('https://github.com/hakimel/reveal.js/archive/2.6.2.tar.gz')
