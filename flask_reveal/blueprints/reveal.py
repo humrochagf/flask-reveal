@@ -15,6 +15,7 @@ def get_img(filename):
     :param filename: the image filename from the request
     :return: the image resource
     """
+
     return send_from_directory(current_app.config.get('MEDIA_ROOT'), filename)
 
 
@@ -22,8 +23,6 @@ def get_img(filename):
 def presentation():
     """
     View responsible to render the presentation
-
-    TODO: Add style configuration
     """
 
     context = {

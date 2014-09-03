@@ -7,6 +7,13 @@ from .blueprints.reveal import reveal_blueprint
 
 
 def create_app(dir):
+    """
+    Create and configure the Flask app
+
+    :param dir: presentation directory
+    :return: Flask app
+    """
+
     current_dir = path.abspath(dir)
 
     app = Flask('flask_reveal')
