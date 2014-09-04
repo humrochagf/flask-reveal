@@ -54,7 +54,7 @@ REVEAL_CONFIG = {
     # by using a data-autoslide attribute on your slides
     'autoSlide': 0,
 
-     # Stop auto-sliding after user input
+    # Stop auto-sliding after user input
     'autoSlideStoppable': True,
 
     # Enable slide navigation via mouse wheel
