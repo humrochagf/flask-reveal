@@ -4,6 +4,8 @@
 Usage:
     flaskreveal start [-d | --debug]
     flaskreveal start [-d | --debug] PATH
+    flaskreveal mkpresentation
+    flaskreveal mkpresentation NAME
     flaskreveal installreveal
     flaskreveal installreveal -f FILE
     flaskreveal installreveal -u URL
@@ -122,6 +124,28 @@ def install_from_web(release_url):
         install_reveal_from_file(response[0])
 
 
+def make_presentation(presentation_path='my_presentation'):
+    """
+    Create the presentation directory structure
+
+    :param presentation_path: path to use as the presentation root dir
+    """
+
+    config_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'flask_reveal/config.py'))
+
+    if not os.path.exists(presentation_path):
+        presentation_name = os.path.basename(presentation_path)
+
+        os.mkdir(presentation_path)  # Presentation dir
+        os.mkdir(os.path.join(presentation_path, 'img'))  # Images dir
+        shutil.copy(config_file, presentation_path)  # Config file
+        # First slide file
+        with open(os.path.join(presentation_path, 'slide000.md'), 'w') as f:
+            f.write('# {0}\n\nStart from here!'.format(presentation_name.replace('_', ' ').title()))
+    else:
+        print('This folder already exists')
+
+
 if __name__ == '__main__':
     arguments = docopt(__doc__)
 
@@ -132,6 +156,15 @@ if __name__ == '__main__':
             start(path, debug)
         else:
             start('./', debug)
+
+    elif arguments['mkpresentation']:
+        name = arguments['NAME']
+
+        if name:
+            make_presentation(name)
+        else:
+            make_presentation()
+
     elif arguments['installreveal']:
         file, url = arguments['--file'], arguments['--url']
 
