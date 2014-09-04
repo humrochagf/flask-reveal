@@ -20,26 +20,26 @@ Options:
 import os
 import shutil
 import tarfile
-import urllib
 import zipfile
+from urllib import request, error
 
 from docopt import docopt
 
 from flask_reveal.app import create_app
 
 
-def start(path, debug):
+def start(presentation_path, debug_flag):
     """
     Starting flask app function
 
-    :param path: path to the presentation folder
-    :param debug: debug flag
+    :param presentation_path: path to the presentation folder
+    :param debug_flag: flag to enable or disable debug
     """
 
-    if os.path.isdir(path):
-        app = create_app(path)
+    if os.path.isdir(presentation_path):
+        app = create_app(presentation_path)
 
-        app.run(debug=debug)
+        app.run(debug=debug_flag)
     else:
         print('This is not a valid directory')
 
@@ -62,9 +62,9 @@ def move_and_replace(src, dst):
         if not os.path.exists(dst_dir):
             os.mkdir(dst_dir)  # to copy not fail, create the not existing dirs
 
-        for file in files:
-            src_file = os.path.join(src_dir, file)
-            dst_file = os.path.join(dst_dir, file)
+        for file_ in files:
+            src_file = os.path.join(src_dir, file_)
+            dst_file = os.path.join(dst_dir, file_)
 
             if os.path.exists(dst_file):
                 os.remove(dst_file)  # to copy not fail, create existing files
@@ -74,24 +74,24 @@ def move_and_replace(src, dst):
     shutil.rmtree(src)  # remove the dir structure from the source
 
 
-def install_reveal_from_file(file):
+def install_reveal_from_file(release_file):
     """
     Install reveal from a given .tar.gz or .zip file
 
-    :param file: reveal.js distribution file
+    :param release_file: reveal.js distribution file
     """
 
     static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'flask_reveal/static/'))
 
-    if os.path.isfile(file):
-        if tarfile.is_tarfile(file):
-            with tarfile.open(file, 'r:gz') as tfile:
+    if os.path.isfile(release_file):
+        if tarfile.is_tarfile(release_file):
+            with tarfile.open(release_file, 'r:gz') as tfile:
                 basename = tfile.members[0].name
                 tfile.extractall()
 
             move_and_replace(basename, static_folder)
-        elif zipfile.is_zipfile(file):
-            with zipfile.ZipFile(file, 'r') as zfile:
+        elif zipfile.is_zipfile(release_file):
+            with zipfile.ZipFile(release_file, 'r') as zfile:
                 basename = zfile.namelist()[0]
                 zfile.extractall()
 
@@ -102,18 +102,18 @@ def install_reveal_from_file(file):
         print('This is not a valid file')
 
 
-def install_from_web(url):
+def install_from_web(release_url):
     """
     Installs reveal.js from a given url
 
-    :param url: url of a reveal.js release file
+    :param release_url: url of a reveal.js release file
     """
 
     response = None
 
     try:
-        response = urllib.request.urlretrieve(url)
-    except urllib.error.HTTPError as e:
+        response = request.urlretrieve(release_url)
+    except error.HTTPError as e:
         print('Error while trying to get reveal.js file:\n  {0}'.format(e))
     except ValueError as e:
         print('Value Error:\n  {0}'.format(e))
