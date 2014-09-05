@@ -27,7 +27,7 @@ from urllib import request, error
 
 from docopt import docopt
 
-from flask_reveal.app import create_app
+from flask_reveal.app import FlaskReveal
 
 
 def start(presentation_path, debug_flag):
@@ -39,7 +39,7 @@ def start(presentation_path, debug_flag):
     """
 
     if os.path.isdir(presentation_path):
-        app = create_app(presentation_path)
+        app = FlaskReveal(os.path.abspath(presentation_path), 'flask_reveal')
 
         app.run(debug=debug_flag)
     else:

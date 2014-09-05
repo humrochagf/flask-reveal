@@ -6,31 +6,23 @@ from flask import Flask
 from .blueprints.reveal import reveal_blueprint
 
 
-def create_app(presentation_path):
+class FlaskReveal(Flask):
     """
-    Create and configure the Flask app
-
-    :param presentation_path: presentation directory
-    :return: Flask app
+    Class that extends the Flask class loads the project specific configurations
     """
 
-    current_dir = path.abspath(presentation_path)
+    def __init__(self, presentation_path, import_name, **kwargs):
+        super(FlaskReveal, self).__init__(import_name, **kwargs)
 
-    app = Flask('flask_reveal')
+        self.config['PRESENTATION_ROOT'] = presentation_path
+        self.config['MEDIA_ROOT'] = path.join(presentation_path, 'img')
 
-    # load default config
-    app.config['CURRENT_DIR'] = current_dir
-    app.config['MEDIA_ROOT'] = path.join(current_dir, 'img')
+        self.config.from_object('flask_reveal.config')
 
-    app.config.from_object('flask_reveal.config')
+        try:
+            self.config.from_pyfile(path.join(presentation_path, 'config.py'))
+        except FileNotFoundError:
+            print('Configuration file "config.py" not found on current directory!')
+            print('Loading slides without custom configurations...')
 
-    # load custom config
-    try:
-        app.config.from_pyfile(path.join(current_dir, 'config.py'))
-    except FileNotFoundError:
-        print('Configuration file "config.py" not found on current directory!')
-        print('Loading slides without custom configurations...')
-
-    app.register_blueprint(reveal_blueprint)
-
-    return app
+        self.register_blueprint(reveal_blueprint)
