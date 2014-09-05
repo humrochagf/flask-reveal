@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import shutil
 import tarfile
@@ -11,7 +10,7 @@ from flask_reveal.app import FlaskReveal
 
 def start(presentation_path, debug_flag):
     """
-    Starting flask app function
+    Function to start FlaskReveal app
 
     :param presentation_path: path to the presentation folder
     :param debug_flag: flag to enable or disable debug
