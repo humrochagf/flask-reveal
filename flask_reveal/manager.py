@@ -1,0 +1,125 @@
+# -*- coding: utf-8 -*-
+
+import os
+import shutil
+import tarfile
+import zipfile
+from urllib import request, error
+
+from flask_reveal.app import FlaskReveal
+
+
+def start(presentation_path, debug_flag):
+    """
+    Starting flask app function
+
+    :param presentation_path: path to the presentation folder
+    :param debug_flag: flag to enable or disable debug
+    """
+
+    if os.path.isdir(presentation_path):
+        app = FlaskReveal(os.path.abspath(presentation_path), 'flask_reveal')
+
+        app.run(debug=debug_flag)
+    else:
+        print('This is not a valid directory')
+
+
+def move_and_replace(src, dst):
+    """
+    Helper function used to move files from one place to another, creating os replacing them if needed
+
+    :param src: source directory
+    :param dst: destination directory
+    """
+
+    src = os.path.abspath(src)
+    dst = os.path.abspath(dst)
+
+    for src_dir, dirs, files in os.walk(src):  # using os walk to navigate through the directory tree
+        # keep te dir structure by replacing the source root to the destination on walked path
+        dst_dir = src_dir.replace(src, dst)
+
+        if not os.path.exists(dst_dir):
+            os.mkdir(dst_dir)  # to copy not fail, create the not existing dirs
+
+        for file_ in files:
+            src_file = os.path.join(src_dir, file_)
+            dst_file = os.path.join(dst_dir, file_)
+
+            if os.path.exists(dst_file):
+                os.remove(dst_file)  # to copy not fail, create existing files
+
+            shutil.move(src_file, dst_dir)  # move the files
+
+    shutil.rmtree(src)  # remove the dir structure from the source
+
+
+def install_reveal_from_file(release_file):
+    """
+    Install reveal from a given .tar.gz or .zip file
+
+    :param release_file: reveal.js distribution file
+    """
+
+    static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static/'))
+
+    if os.path.isfile(release_file):
+        if tarfile.is_tarfile(release_file):
+            with tarfile.open(release_file, 'r:gz') as tfile:
+                basename = tfile.members[0].name
+                tfile.extractall()
+
+            move_and_replace(basename, static_folder)
+        elif zipfile.is_zipfile(release_file):
+            with zipfile.ZipFile(release_file, 'r') as zfile:
+                basename = zfile.namelist()[0]
+                zfile.extractall()
+
+            move_and_replace(basename, static_folder)
+        else:
+            print('File type not supported')
+    else:
+        print('This is not a valid file')
+
+
+def install_from_web(release_url):
+    """
+    Installs reveal.js from a given url
+
+    :param release_url: url of a reveal.js release file
+    """
+
+    response = None
+
+    try:
+        response = request.urlretrieve(release_url)
+    except error.HTTPError as e:
+        print('Error while trying to get reveal.js file:\n  {0}'.format(e))
+    except ValueError as e:
+        print('Value Error:\n  {0}'.format(e))
+
+    if response:
+        install_reveal_from_file(response[0])
+
+
+def make_presentation(presentation_path='my_presentation'):
+    """
+    Create the presentation directory structure
+
+    :param presentation_path: path to use as the presentation root dir
+    """
+
+    config_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.py'))
+
+    if not os.path.exists(presentation_path):
+        presentation_name = os.path.basename(presentation_path)
+
+        os.mkdir(presentation_path)  # Presentation dir
+        os.mkdir(os.path.join(presentation_path, 'img'))  # Images dir
+        shutil.copy(config_file, presentation_path)  # Config file
+        # First slide file
+        with open(os.path.join(presentation_path, 'slide000.md'), 'w') as f:
+            f.write('# {0}\n\nStart from here!'.format(presentation_name.replace('_', ' ').title()))
+    else:
+        print('This folder already exists')
