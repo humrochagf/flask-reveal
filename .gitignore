@@ -1,5 +1,6 @@
 .idea/*
 flask_reveal/static/*
+build/*
 *.pyc
 *.tar.gz
 *.zip
