@@ -1,6 +1,9 @@
 .idea/*
 flask_reveal/static/*
 build/*
+*.egg
+*.egg-info
 *.pyc
+*.pyo
 *.tar.gz
 *.zip
