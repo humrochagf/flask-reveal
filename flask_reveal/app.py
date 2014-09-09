@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os import path
+import os
 
 from flask import Flask
 
@@ -11,18 +11,26 @@ class FlaskReveal(Flask):
     Class that extends the Flask class loads the project specific configurations
     """
 
-    def __init__(self, presentation_path, import_name, **kwargs):
+    def __init__(self, import_name, **kwargs):
         super(FlaskReveal, self).__init__(import_name, **kwargs)
 
-        self.config['PRESENTATION_ROOT'] = presentation_path
-        self.config['MEDIA_ROOT'] = path.join(presentation_path, 'img')
-
         self.config.from_object('flask_reveal.config')
+        self.register_blueprint(reveal_blueprint)
+
+    def start(self, path, debug=False):
+        """
+        Starting method that handles configuration and starts the app
+
+        :param path: path to presentation root
+        :param debug: debug flag
+        """
+        self.config['PRESENTATION_ROOT'] = path
+        self.config['MEDIA_ROOT'] = os.path.join(path, 'img')
 
         try:
-            self.config.from_pyfile(path.join(presentation_path, 'config.py'))
+            self.config.from_pyfile(os.path.join(path, 'config.py'))
         except FileNotFoundError:
             print('Configuration file "config.py" not found on current directory!')
             print('Loading slides without custom configurations...')
 
-        self.register_blueprint(reveal_blueprint)
+        self.run(debug=debug)

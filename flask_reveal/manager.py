@@ -37,9 +37,9 @@ def start(presentation_path, debug_flag):
     """
 
     if os.path.isdir(presentation_path):
-        app = FlaskReveal(os.path.abspath(presentation_path), 'flask_reveal')
+        app = FlaskReveal('flask_reveal')
 
-        app.run(debug=debug_flag)
+        app.start(os.path.abspath(presentation_path), debug=debug_flag)
     else:
         print('This is not a valid directory')
 
