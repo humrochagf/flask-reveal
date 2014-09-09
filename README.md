@@ -24,7 +24,7 @@ The current version of flask-reveal runs on python 3.x
 To install flask-reveal on your computer clone this repo:
 
 ```
-git clone git@github.com:humrochagf/flask-reveal.git
+git clone https://github.com/humrochagf/flask-reveal.git
 ```
 
 Go to created folder and run:

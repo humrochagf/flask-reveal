@@ -1,6 +1,7 @@
 .idea/*
 flask_reveal/static/*
 build/*
+MANIFEST
 *.egg
 *.egg-info
 *.pyc
