@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
+from subprocess import call
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
@@ -11,7 +11,7 @@ class CustomInstall(install):
     def run(self):
         install.run(self)
         # calling reveal installation
-        os.system('flaskreveal installreveal')
+        call(['flaskreveal', 'installreveal'], cwd=self.install_scripts)
 
 
 setup(
