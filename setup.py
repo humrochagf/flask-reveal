@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
+import os
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+
+
+class CustomInstall(install):
+    """
+    Include reveal.js installation process
+    """
+    def run(self):
+        install.run(self)
+        # calling reveal installation
+        os.system('flaskreveal installreveal')
 
 
 setup(
@@ -18,6 +30,7 @@ setup(
         'docopt>=0.6',
     ],
     entry_points=dict(console_scripts=['flaskreveal=flask_reveal.manager:run']),
+    cmdclass=dict(install=CustomInstall),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],
     classifiers=[
