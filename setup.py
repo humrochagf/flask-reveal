@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 setup(
@@ -10,14 +10,14 @@ setup(
     author='Humberto Rocha Gonçalves Filho',
     author_email='humrochagf@gmail.com',
     description='Make reveal.js presentations with Flask',
-    packages=['flask_reveal', 'flask_reveal.blueprints'],
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=[
         'Flask>=0.10',
         'docopt>=0.6',
     ],
-    scripts=['flaskreveal.py'],
+    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.manager:run']),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],
     classifiers=[
@@ -32,3 +32,4 @@ setup(
         'Topic :: Text Processing :: Markup :: HTML',
     ]
 )
+
