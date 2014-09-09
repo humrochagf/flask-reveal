@@ -9,6 +9,7 @@ This are the milestones to the project release:
 - Remove the docopt dependencies
 - Make tests for the project
 - Better version handling
+- Python 2.7 backport
 
 ## Requirements
 
