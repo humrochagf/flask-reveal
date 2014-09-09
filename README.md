@@ -2,43 +2,44 @@
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
+## Project milestones
+
+This are the milestones to the project release:
+
+- Remove the docopt dependencies
+- Make tests for the project
+- Better version handling
+
 ## Requirements
 
- - Python 3
- - Flask
- - reveal.js
- - docopt
+The current version of flask-reveal runs on python 3.x
+
+- Flask
+- docopt
+- reveal.js
+
+## Installation
+
+To install flask-reveal on your computer clone this repo:
+
+```
+git clone git@github.com:humrochagf/flask-reveal.git
+```
+
+Go to created folder and run:
+
+```
+python setup.py install
+```
 
 ## Usage
-
-### Install/Update reveal.js files
-
-On the first use, you need to setup the reveal.js files with the project. To make that, just run the following command:
-
-```
-python flaskreveal.py installreveal
-```
-
-It will download reveal.js from a default **url** and make the install. If you want to set the **url** by yourself:
-
-```
-python flaskreveal.py installreveal -u URL
-```
-
-If you already have the reveal.js file:
-
-```
-python flaskreveal.py installreveal -f FILE
-```
-
-Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
 
 ### Running the Presentation
 
 To start your presentation run:
 
 ```
-python flaskreveal.py start [-d | --debug] [PATH]
+flaskreveal start [-d | --debug] [PATH]
 ```
 
 Running without the `PATH` information, it will do the presentation files lookup inside the current directory.
@@ -48,8 +49,30 @@ Running without the `PATH` information, it will do the presentation files lookup
 To create a new presentation run:
 
 ```
-python flaskreveal.py mkpresentation [NAME]
+flaskreveal mkpresentation [NAME]
 ```
+
+### Install/Update reveal.js files
+
+If you need for some reason reinstall reveal.js files, just run the following command:
+
+```
+flaskreveal installreveal
+```
+
+It will download reveal.js from a default **url** and make the install. If you want to set the **url** by yourself:
+
+```
+flaskreveal installreveal -u URL
+```
+
+If you already have the reveal.js file:
+
+```
+flaskreveal installreveal -f FILE
+```
+
+Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
 
 ## Presentation Setup
 
