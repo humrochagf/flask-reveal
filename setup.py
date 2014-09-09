@@ -16,7 +16,7 @@ class CustomInstall(install):
 
 setup(
     name='flask-reveal',
-    version='0.1',
+    version='0.1.dev0',
     url='https://github.com/humrochagf/flask-reveal',
     license='MIT',
     author='Humberto Rocha Gonçalves Filho',
