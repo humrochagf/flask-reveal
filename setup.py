@@ -29,7 +29,7 @@ setup(
         'Flask>=0.10',
         'docopt>=0.6',
     ],
-    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.manager:run']),
+    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.manager:cli_execute']),
     cmdclass=dict(install=CustomInstall),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],

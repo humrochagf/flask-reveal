@@ -144,7 +144,7 @@ def make_presentation(presentation_path='my_presentation'):
         print('This folder already exists')
 
 
-def run():
+def cli_execute():
     arguments = docopt(__doc__)
 
     if arguments['start']:
