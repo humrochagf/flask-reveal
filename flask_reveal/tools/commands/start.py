@@ -17,15 +17,17 @@ class Start(argparse.ArgumentParser):
         self.add_argument('path', nargs='?', default=os.getcwd())
         self.add_argument('-d', '--debug', action='store_true')
 
+    def parse_args(self, args=None, namespace=None):
+        super().parse_args(args, self)
+
     def run(self, args=None):
+        self.parse_args(args)
 
-        parse_result = self.parse_args(args)
-
-        if os.path.isdir(parse_result.path):
+        if os.path.isdir(self.path):
             app = FlaskReveal('flask_reveal')
 
-            app.start(os.path.abspath(parse_result.path), debug=parse_result.debug)
+            app.start(os.path.abspath(self.path), debug=self.debug)
         else:
-            raise NotADirectoryError('{0} is not a valid directory'.format(parse_result.path))
+            raise NotADirectoryError('{0} is not a valid directory'.format(self.path))
 
 command = Start()
