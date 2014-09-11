@@ -18,6 +18,7 @@ Options:
     -h --help               Show this help.
 
 """
+import sys
 import os
 import shutil
 import tarfile
@@ -25,23 +26,7 @@ import zipfile
 from docopt import docopt
 from urllib import request, error
 
-from flask_reveal.app import FlaskReveal
-
-
-def start(presentation_path, debug_flag):
-    """
-    Function to start FlaskReveal app
-
-    :param presentation_path: path to the presentation folder
-    :param debug_flag: flag to enable or disable debug
-    """
-
-    if os.path.isdir(presentation_path):
-        app = FlaskReveal('flask_reveal')
-
-        app.start(os.path.abspath(presentation_path), debug=debug_flag)
-    else:
-        print('This is not a valid directory')
+from flask_reveal.tools.commands.start import command
 
 
 def move_and_replace(src, dst):
@@ -148,12 +133,7 @@ def cli_execute():
     arguments = docopt(__doc__)
 
     if arguments['start']:
-        path, debug = arguments['PATH'], arguments['--debug']
-
-        if path:
-            start(path, debug)
-        else:
-            start('./', debug)
+        command.run(sys.argv[2:])
 
     elif arguments['mkpresentation']:
         name = arguments['NAME']
