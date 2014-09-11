@@ -14,7 +14,9 @@ class Start(argparse.ArgumentParser):
     def __init__(self):
         super().__init__(**self.info)
 
-        self.add_argument('path', nargs='?', default=os.getcwd())
+        self.path = os.getcwd()
+        self.debug = False
+        self.add_argument('path', nargs='?', default=self.path)
         self.add_argument('-d', '--debug', action='store_true')
 
     def parse_args(self, args=None, namespace=None):
