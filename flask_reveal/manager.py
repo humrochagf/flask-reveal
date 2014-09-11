@@ -26,7 +26,8 @@ import zipfile
 from docopt import docopt
 from urllib import request, error
 
-from flask_reveal.tools.commands.start import command
+from flask_reveal.tools.commands.start import Start
+from flask_reveal.tools.commands.mkpresentation import MkPresentation
 
 
 def move_and_replace(src, dst):
@@ -107,41 +108,18 @@ def install_from_web(release_url):
         install_reveal_from_file(response[0])
 
 
-def make_presentation(presentation_path='my_presentation'):
-    """
-    Create the presentation directory structure
-
-    :param presentation_path: path to use as the presentation root dir
-    """
-
-    config_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.py'))
-
-    if not os.path.exists(presentation_path):
-        presentation_name = os.path.basename(presentation_path)
-
-        os.mkdir(presentation_path)  # Presentation dir
-        os.mkdir(os.path.join(presentation_path, 'img'))  # Images dir
-        shutil.copy(config_file, presentation_path)  # Config file
-        # First slide file
-        with open(os.path.join(presentation_path, 'slide000.md'), 'w') as f:
-            f.write('# {0}\n\nStart from here!'.format(presentation_name.replace('_', ' ').title()))
-    else:
-        print('This folder already exists')
-
-
 def cli_execute():
     arguments = docopt(__doc__)
 
     if arguments['start']:
+        command = Start()
+
         command.run(sys.argv[2:])
 
     elif arguments['mkpresentation']:
-        name = arguments['NAME']
+        command = MkPresentation()
 
-        if name:
-            make_presentation(name)
-        else:
-            make_presentation()
+        command.run(sys.argv[2:])
 
     elif arguments['installreveal']:
         file, url = arguments['--file'], arguments['--url']
