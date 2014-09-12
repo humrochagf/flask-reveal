@@ -6,7 +6,7 @@
 
 This are the milestones to the project release:
 
-- Remove the docopt dependencies
+- ~~Remove the docopt dependencies~~
 - Make tests for the project
 - Better version handling
 - Python 2.7 backport
@@ -16,7 +16,6 @@ This are the milestones to the project release:
 The current version of flask-reveal runs on python 3.x
 
 - Flask
-- docopt
 - reveal.js
 
 ## Installation

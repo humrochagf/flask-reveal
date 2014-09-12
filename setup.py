@@ -16,7 +16,7 @@ class CustomInstall(install):
 
 setup(
     name='flask-reveal',
-    version='0.1.dev0',
+    version='0.1.dev1',
     url='https://github.com/humrochagf/flask-reveal',
     license='MIT',
     author='Humberto Rocha Gonçalves Filho',
@@ -27,9 +27,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'Flask>=0.10',
-        'docopt>=0.6',
     ],
-    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.manager:cli_execute']),
+    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
     cmdclass=dict(install=CustomInstall),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],
