@@ -15,6 +15,11 @@ class FlaskRevealTestCase(unittest.TestCase):
 
         self.app = app_config.test_client()
 
+    def test_presentation_view_status(self):
+        response = self.app.get('/')
+
+        self.assertEqual(response.status, '200 OK')
+
 
 if __name__ == '__main__':
     unittest.main()
