@@ -19,9 +19,12 @@ class FlaskRevealTestCase(unittest.TestCase):
         self.app = self.create_app()
 
     def test_presentation_view_status(self):
-        response = self.app.get('/')
+        with self.app.get('/') as response:
+            self.assertEqual(response.status, '200 OK')
 
-        self.assertEqual(response.status, '200 OK')
+    def test_get_img(self):
+        with self.app.get('/img/python.png') as response:
+            self.assertEqual(response.status, '200 OK')
 
 
 if __name__ == '__main__':
