@@ -6,14 +6,17 @@ from flask_reveal.app import FlaskReveal
 
 
 class FlaskRevealTestCase(unittest.TestCase):
-    def setUp(self):
+    def create_app(self):
+        presentation_root = os.path.abspath(os.path.join(os.path.basename(__file__), '../example_slides'))
         app_config = FlaskReveal('flask_reveal')
-
-        app_config.config['PRESENTATION_ROOT'] = os.path.abspath(os.path.join(__file__, '../exaple_slides'))
-        app_config.config['MEDIA_ROOT'] = os.path.join(app_config.config['PRESENTATION_ROOT'], 'img')
+        app_config.config['PRESENTATION_ROOT'] = presentation_root
+        app_config.config['MEDIA_ROOT'] = os.path.join(presentation_root, 'img')
         app_config.config['TESTING'] = True
 
-        self.app = app_config.test_client()
+        return app_config.test_client()
+
+    def setUp(self):
+        self.app = self.create_app()
 
     def test_presentation_view_status(self):
         response = self.app.get('/')
