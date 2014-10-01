@@ -27,7 +27,7 @@ def presentation():
 
     context = {
         'meta': current_app.config.get('REVEAL_META'),
-        'slides': load_markdown_slides(),
+        'slides': load_markdown_slides(current_app.config.get('PRESENTATION_ROOT')),
         'config': current_app.config.get('REVEAL_CONFIG'),
     }
     
