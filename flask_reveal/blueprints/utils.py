@@ -2,8 +2,6 @@
 import glob
 import os
 
-from flask import current_app
-
 
 def load_markdown_slides(path):
     """
