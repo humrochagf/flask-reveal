@@ -28,7 +28,7 @@ class CLI(argparse.ArgumentParser):
         return super().parse_known_args(args, self)[1]
 
     def run(self, args=None):
-        subcommand_args = self.parse_known_args()
+        subcommand_args = self.parse_known_args(args)
 
         if self.subcommand in self.subcommand_list:
             command = load_subcomand(self.subcommand)
