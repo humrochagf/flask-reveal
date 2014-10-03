@@ -4,6 +4,8 @@ import shutil
 import unittest
 import tempfile
 
+from flask import current_app
+
 from flask_reveal.app import FlaskReveal
 from flask_reveal.blueprints.utils import load_markdown_slides
 
@@ -40,6 +42,10 @@ class FlaskRevealTestCase(unittest.TestCase):
 
     def tearDown(self):
         shutil.rmtree(self.presentation_root)
+
+    def test_current_app(self):
+        with self.app.app_context():
+            self.assertEqual(current_app.name, 'flask_reveal')
 
     def test_presentation_view_status(self):
         with self.client.get('/') as response:
