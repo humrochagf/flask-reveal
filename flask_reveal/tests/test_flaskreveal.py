@@ -53,7 +53,3 @@ class FlaskRevealTestCase(unittest.TestCase):
         slides = load_markdown_slides(self.presentation_root)
 
         self.assertEqual(slides, self.slides)
-
-
-if __name__ == '__main__':
-    unittest.main()
