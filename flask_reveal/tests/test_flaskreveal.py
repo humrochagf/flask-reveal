@@ -18,9 +18,13 @@ class FlaskRevealTestCase(unittest.TestCase):
     def create_presentation_structure(self, slides=None):
         presentation_root = tempfile.mkdtemp()
         media_root = tempfile.mkdtemp()
+
         fd, img_file = tempfile.mkstemp('.jpg', dir=media_root)
 
         os.close(fd)
+
+        with open(os.path.join(presentation_root, 'config.py'), 'w') as config_file:
+            config_file.write('# test')
 
         for index, slide in enumerate(slides):
             fd, _ = tempfile.mkstemp('.md', str(index), presentation_root)
@@ -29,18 +33,20 @@ class FlaskRevealTestCase(unittest.TestCase):
 
         return presentation_root, media_root, os.path.basename(img_file)
 
-    def create_app(self, presentation_root, media_root):
+    def create_test_client(self, presentation_root, media_root):
         app = FlaskReveal('flask_reveal')
-        app.config['PRESENTATION_ROOT'] = presentation_root
-        app.config['MEDIA_ROOT'] = media_root
+
+        app.load_user_config(presentation_root, media_root)
         app.config['TESTING'] = True
 
-        return app
+        return app.test_client()
 
     def setUp(self):
+        self.app = FlaskReveal('flask_reveal')
+
+        self.app.config['TESTING'] = True
+
         self.presentation_root, self.media_root, self.img_file = self.create_presentation_structure(self.slides)
-        self.app = self.create_app(self.presentation_root, self.media_root)
-        self.client = self.app.test_client()
 
     def tearDown(self):
         shutil.rmtree(self.presentation_root)
@@ -59,11 +65,15 @@ class FlaskRevealTestCase(unittest.TestCase):
             self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
 
     def test_presentation_view_status(self):
-        with self.client.get('/') as response:
+        client = self.create_test_client(self.presentation_root, self.media_root)
+
+        with client.get('/') as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_get_img_view_status(self):
-        with self.client.get('/img/{0}'.format(self.img_file)) as response:
+        client = self.create_test_client(self.presentation_root, self.media_root)
+
+        with client.get('/img/{0}'.format(self.img_file)) as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_load_markdown_slides(self):
