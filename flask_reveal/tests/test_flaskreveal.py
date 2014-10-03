@@ -7,6 +7,7 @@ import tempfile
 from flask import current_app
 
 from flask_reveal.app import FlaskReveal
+from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
 from flask_reveal.blueprints.utils import load_markdown_slides
 from flask_reveal.blueprints.reveal import reveal_blueprint
 
@@ -51,6 +52,11 @@ class FlaskRevealTestCase(unittest.TestCase):
     def test_blueprint_loading(self):
         with self.app.app_context():
             self.assertDictEqual(current_app.blueprints, {'reveal': reveal_blueprint})
+
+    def test_default_config_loading(self):
+        with self.app.app_context():
+            self.assertDictEqual(current_app.config['REVEAL_META'], REVEAL_META)
+            self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
 
     def test_presentation_view_status(self):
         with self.client.get('/') as response:
