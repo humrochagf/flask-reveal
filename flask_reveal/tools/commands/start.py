@@ -15,8 +15,10 @@ class Start(argparse.ArgumentParser):
         super().__init__(**self.info)
 
         self.path = os.getcwd()
+        self.media = None
         self.debug = False
         self.add_argument('path', nargs='?', default=self.path)
+        self.add_argument('-m', '--media',  default=self.media)
         self.add_argument('-d', '--debug', action='store_true')
 
     def parse_args(self, args=None, namespace=None):
@@ -26,10 +28,18 @@ class Start(argparse.ArgumentParser):
         self.parse_args(args)
 
         if os.path.isdir(self.path):
-            app = FlaskReveal('flask_reveal')
+            self.path = os.path.abspath(self.path)
 
-            app.start(os.path.abspath(self.path), debug=self.debug)
+            if not self.media:
+                self.media = os.path.join(self.path, 'img')
+
+            if os.path.isdir(self.media):
+                app = FlaskReveal('flask_reveal')
+
+                app.start(self.path, media_root=self.media, debug=self.debug)
+            else:
+                raise NotADirectoryError('your media path {0} is not a valid directory'.format(self.media))
         else:
-            raise NotADirectoryError('{0} is not a valid directory'.format(self.path))
+            raise NotADirectoryError('your presentation path {0} is not a valid directory'.format(self.path))
 
 command = Start()
