@@ -16,27 +16,29 @@ class FlaskRevealTestCase(unittest.TestCase):
     slides = ['Slide1', 'Slide2', 'Slide3']
 
     def create_presentation_structure(self, slides=None):
-        presentation_root = tempfile.mkdtemp()
-        media_root = tempfile.mkdtemp()
+        root = tempfile.mkdtemp()
+        media = tempfile.mkdtemp()
 
-        fd, img_file = tempfile.mkstemp('.jpg', dir=media_root)
+        fd_cfg, config = tempfile.mkstemp('.py', dir=root)
+        fd_img, image = tempfile.mkstemp('.jpg', dir=media)
 
-        os.close(fd)
-
-        with open(os.path.join(presentation_root, 'config.py'), 'w') as config_file:
-            config_file.write('# test')
+        os.close(fd_cfg)
+        os.close(fd_img)
 
         for index, slide in enumerate(slides):
-            fd, _ = tempfile.mkstemp('.md', str(index), presentation_root)
+            fd, _ = tempfile.mkstemp('.md', str(index), root)
             with os.fdopen(fd, 'w') as file:
                 file.write(slide)
 
-        return presentation_root, media_root, os.path.basename(img_file)
+        return dict(root=root,
+                    media=media,
+                    config=config,
+                    image=os.path.basename(image))
 
-    def create_test_client(self, presentation_root, media_root):
+    def create_test_client(self, presentation_root, media_root, config):
         app = FlaskReveal('flask_reveal')
 
-        app.load_user_config(presentation_root, media_root)
+        app.load_user_config(presentation_root, media_root, config)
         app.config['TESTING'] = True
 
         return app.test_client()
@@ -46,10 +48,10 @@ class FlaskRevealTestCase(unittest.TestCase):
 
         self.app.config['TESTING'] = True
 
-        self.presentation_root, self.media_root, self.img_file = self.create_presentation_structure(self.slides)
+        self.presentation = self.create_presentation_structure(self.slides)
 
     def tearDown(self):
-        shutil.rmtree(self.presentation_root)
+        shutil.rmtree(self.presentation['root'])
 
     def test_current_app(self):
         with self.app.app_context():
@@ -65,18 +67,22 @@ class FlaskRevealTestCase(unittest.TestCase):
             self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
 
     def test_presentation_view_status(self):
-        client = self.create_test_client(self.presentation_root, self.media_root)
+        client = self.create_test_client(self.presentation['root'],
+                                         self.presentation['media'],
+                                         self.presentation['config'])
 
         with client.get('/') as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_get_img_view_status(self):
-        client = self.create_test_client(self.presentation_root, self.media_root)
+        client = self.create_test_client(self.presentation['root'],
+                                         self.presentation['media'],
+                                         self.presentation['config'])
 
-        with client.get('/img/{0}'.format(self.img_file)) as response:
+        with client.get('/img/{0}'.format(self.presentation['image'])) as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_load_markdown_slides(self):
-        slides = load_markdown_slides(self.presentation_root)
+        slides = load_markdown_slides(self.presentation['root'])
 
         self.assertEqual(slides, self.slides)
