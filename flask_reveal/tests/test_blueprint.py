@@ -5,7 +5,7 @@ import unittest
 import tempfile
 
 from flask_reveal.app import FlaskReveal
-from flask_reveal.blueprints.utils import load_markdown_slides
+from flask_reveal.blueprints.reveal import load_markdown_slides
 
 
 class BlueprintTestCase(unittest.TestCase):
