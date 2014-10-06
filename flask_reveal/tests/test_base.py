@@ -45,3 +45,6 @@ class BaseAppTestCase(unittest.TestCase):
 
         with self.app.app_context():
             self.assertEqual(current_app.config['TEST_VAR'], 'TEST')
+
+    def test_user_config_loading_invalid_config_file(self):
+        self.assertRaises(FileNotFoundError, self.app.load_user_config, '', '', 'somefile.py')
