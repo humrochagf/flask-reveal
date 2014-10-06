@@ -17,7 +17,7 @@ class FlaskReveal(Flask):
         self.config.from_object('flask_reveal.config')
         self.register_blueprint(reveal_blueprint)
 
-    def load_user_config(self, presentation_root, media_root):
+    def load_user_config(self, presentation_root, media_root, config=None):
         """
         Loading the user presentation configuration
 
@@ -28,12 +28,13 @@ class FlaskReveal(Flask):
         self.config['PRESENTATION_ROOT'] = presentation_root
         self.config['MEDIA_ROOT'] = media_root
 
-        try:
-            self.config.from_pyfile(os.path.join(presentation_root, 'config.py'))
-        except FileNotFoundError:
-            raise
+        if config:
+            try:
+                self.config.from_pyfile(os.path.join(presentation_root, 'config.py'))
+            except FileNotFoundError:
+                raise
 
-    def start(self, presentation_root, media_root, debug=False):
+    def start(self, presentation_root, media_root, config=None, debug=False):
         """
         Starting method that handles configuration and starts the app
 
@@ -42,9 +43,8 @@ class FlaskReveal(Flask):
         :param debug: debug flag
         """
         try:
-            self.load_user_config(presentation_root, media_root)
+            self.load_user_config(presentation_root, media_root, config)
         except FileNotFoundError:
-            print('Configuration file "config.py" not found on current directory!')
-            print('Loading slides without custom configurations...')
+            raise
 
         self.run(debug=debug)
