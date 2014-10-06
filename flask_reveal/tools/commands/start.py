@@ -48,7 +48,7 @@ class Start(argparse.ArgumentParser):
             else:
                 raise NotADirectoryError('your media path {0} is not a valid directory'.format(self.media))
         else:
-             raise NotADirectoryError('your presentation path {0} is not a valid directory'.format(self.path))
+            raise NotADirectoryError('your presentation path {0} is not a valid directory'.format(self.path))
 
     def run(self, args=None):
         self.parse_args(args)

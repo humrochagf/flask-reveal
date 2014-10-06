@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-
 from flask import Flask
 
 from .blueprints.reveal import reveal_blueprint
