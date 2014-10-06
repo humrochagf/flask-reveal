@@ -30,7 +30,7 @@ class FlaskReveal(Flask):
 
         if config:
             try:
-                self.config.from_pyfile(os.path.join(presentation_root, 'config.py'))
+                self.config.from_pyfile(config)
             except FileNotFoundError:
                 raise
 
