@@ -66,6 +66,15 @@ class FlaskRevealTestCase(unittest.TestCase):
             self.assertDictEqual(current_app.config['REVEAL_META'], REVEAL_META)
             self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
 
+    def test_user_config_loading(self):
+        with open(self.presentation['config'], 'w') as config:
+            config.write('TEST_VAR = "TEST"')
+
+        self.app.load_user_config('', '', self.presentation['config'])
+
+        with self.app.app_context():
+            self.assertEqual(current_app.config['TEST_VAR'], 'TEST')
+
     def test_presentation_view_status(self):
         client = self.create_test_client(self.presentation['root'],
                                          self.presentation['media'],
