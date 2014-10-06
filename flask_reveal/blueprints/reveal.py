@@ -1,10 +1,30 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, current_app, send_from_directory
+import os
+import glob
 
-from .utils import load_markdown_slides
+from flask import Blueprint, render_template, current_app, send_from_directory
 
 
 reveal_blueprint = Blueprint('reveal', __name__)
+
+
+def load_markdown_slides(path):
+    """
+    Search the slide pages in the current directory, loading them in
+    alphabetical order as a list of strings.
+
+    The slide pages must be on markdown format having ".md" extension
+
+    :return: a list of strings with the slides content
+    """
+
+    slides = []
+
+    for file in sorted(glob.glob(os.path.join(path, '*.md'))):
+        with open(file, 'r') as sb:
+            slides.append(sb.read())
+
+    return slides
 
 
 @reveal_blueprint.route('/img/<path:filename>')
