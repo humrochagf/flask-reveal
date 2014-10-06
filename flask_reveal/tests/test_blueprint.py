@@ -4,15 +4,11 @@ import shutil
 import unittest
 import tempfile
 
-from flask import current_app
-
 from flask_reveal.app import FlaskReveal
-from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
 from flask_reveal.blueprints.utils import load_markdown_slides
-from flask_reveal.blueprints.reveal import reveal_blueprint
 
 
-class FlaskRevealTestCase(unittest.TestCase):
+class BlueprintTestCase(unittest.TestCase):
     slides = ['Slide1', 'Slide2', 'Slide3']
 
     def create_presentation_structure(self, slides=None):
@@ -44,36 +40,10 @@ class FlaskRevealTestCase(unittest.TestCase):
         return app.test_client()
 
     def setUp(self):
-        self.app = FlaskReveal('flask_reveal')
-
-        self.app.config['TESTING'] = True
-
         self.presentation = self.create_presentation_structure(self.slides)
 
     def tearDown(self):
         shutil.rmtree(self.presentation['root'])
-
-    def test_current_app(self):
-        with self.app.app_context():
-            self.assertEqual(current_app.name, 'flask_reveal')
-
-    def test_blueprint_loading(self):
-        with self.app.app_context():
-            self.assertDictEqual(current_app.blueprints, {'reveal': reveal_blueprint})
-
-    def test_default_config_loading(self):
-        with self.app.app_context():
-            self.assertDictEqual(current_app.config['REVEAL_META'], REVEAL_META)
-            self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
-
-    def test_user_config_loading(self):
-        with open(self.presentation['config'], 'w') as config:
-            config.write('TEST_VAR = "TEST"')
-
-        self.app.load_user_config('', '', self.presentation['config'])
-
-        with self.app.app_context():
-            self.assertEqual(current_app.config['TEST_VAR'], 'TEST')
 
     def test_presentation_view_status(self):
         client = self.create_test_client(self.presentation['root'],
