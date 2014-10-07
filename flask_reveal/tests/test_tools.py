@@ -75,3 +75,11 @@ class ToolsTestCase(unittest.TestCase):
         extracted_files = sorted(os.listdir(extracted))
 
         self.assertEqual(extracted_files, src_files)
+
+    def test_extract_file_on_non_file(self):
+        self.assertRaises(TypeError, extract_file, self.base)
+
+    def test_extract_file_on_non_tar_or_zip(self):
+        files = os.listdir(self.destination)
+
+        self.assertRaises(TypeError, extract_file, files[0])
