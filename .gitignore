@@ -2,6 +2,7 @@
 flask_reveal/static/*
 build/*
 MANIFEST
+.coverage
 *.egg
 *.egg-info
 *.pyc
