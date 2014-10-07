@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import tarfile
+import zipfile
 import shutil
 import unittest
 import tempfile
@@ -17,6 +18,8 @@ class ToolsTestCase(unittest.TestCase):
 
         os.close(fd)
 
+        tempfile.mkdtemp(dir=source)
+
         with open(file_to_replace_on_source, 'w') as f_source:
             f_source.write('source')
 
@@ -32,20 +35,36 @@ class ToolsTestCase(unittest.TestCase):
         return destination
 
     def make_tar(self, content, base):
-        fd, tar = tempfile.mkstemp('.tar.gz', dir=base)
+        fd, tar_file = tempfile.mkstemp('.tar.gz', dir=base)
 
         os.close(fd)
 
-        with tarfile.open(tar, 'w:gz') as t:
+        with tarfile.open(tar_file, 'w:gz') as t:
             t.add(content, arcname='tarfolder')
 
-        return tar
+        return tar_file
+
+    def make_zip(self, content, base):
+        fd, zip_file = tempfile.mkstemp('.zip', dir=base)
+
+        os.close(fd)
+
+        with zipfile.ZipFile(zip_file, 'w') as z:
+            z.write(content, arcname='zipfolder')
+            for item in os.listdir(content):
+                z.write(os.path.join(content, item), arcname=os.path.join('zipfolder', item))
+
+        return zip_file
 
     def setUp(self):
         self.base = tempfile.mkdtemp()
         self.source = self.make_src(self.base)
         self.destination = self.make_dst(self.base)
         self.tar = self.make_tar(self.source, self.base)
+        self.zip = self.make_zip(self.source, self.base)
+        fd, self.somefile = tempfile.mkstemp(dir=self.base)
+
+        os.close(fd)
 
     def tearDown(self):
         shutil.rmtree(self.base)
@@ -67,7 +86,7 @@ class ToolsTestCase(unittest.TestCase):
         # The moved files from source should be equal to the files on destination directory
         self.assertEqual(src_files, dst_files)
 
-    def test_extract_file(self):
+    def test_extract_file_tarfile(self):
         src_files = sorted(os.listdir(self.source))
 
         extracted = extract_file(self.tar, self.base)
@@ -76,10 +95,17 @@ class ToolsTestCase(unittest.TestCase):
 
         self.assertEqual(extracted_files, src_files)
 
+    def test_extract_file_zipfile(self):
+        src_files = sorted(os.listdir(self.source))
+
+        extracted = extract_file(self.zip, self.base)
+
+        extracted_files = sorted(os.listdir(extracted))
+
+        self.assertEqual(extracted_files, src_files)
+
     def test_extract_file_on_non_file(self):
-        self.assertRaises(TypeError, extract_file, self.base)
+        self.assertRaises(FileNotFoundError, extract_file, self.base)
 
     def test_extract_file_on_non_tar_or_zip(self):
-        files = os.listdir(self.destination)
-
-        self.assertRaises(TypeError, extract_file, files[0])
+        self.assertRaises(NotImplementedError, extract_file, self.somefile)

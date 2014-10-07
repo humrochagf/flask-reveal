@@ -46,8 +46,8 @@ def extract_file(compressed_file, path='.'):
                 basename = zfile.namelist()[0]
                 zfile.extractall(path)
         else:
-            raise TypeError('File type not supported')
+            raise NotImplementedError('File type not supported')
     else:
-        raise TypeError('{0} is not a valid file'.format(compressed_file))
+        raise FileNotFoundError('{0} is not a valid file'.format(compressed_file))
 
     return os.path.abspath(os.path.join(path, basename))
