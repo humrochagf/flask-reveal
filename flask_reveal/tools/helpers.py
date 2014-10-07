@@ -35,19 +35,19 @@ def move_and_replace(src, dst):
     shutil.rmtree(src)  # remove the dir structure from the source
 
 
-def extract_file(file):
+def extract_file(file, path='.'):
     if os.path.isfile(file):
         if tarfile.is_tarfile(file):
             with tarfile.open(file, 'r:gz') as tfile:
                 basename = tfile.members[0].name
-                tfile.extractall()
+                tfile.extractall(path+'/')
         elif zipfile.is_zipfile(file):
             with zipfile.ZipFile(file, 'r') as zfile:
                 basename = zfile.namelist()[0]
-                zfile.extractall()
+                zfile.extractall(path)
         else:
             raise TypeError('File type not supported')
     else:
         raise TypeError('{0} is not a valid file'.format(file))
 
-    return os.path.abspath(basename)
+    return os.path.abspath(os.path.join(path, basename))
