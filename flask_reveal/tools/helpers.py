@@ -16,7 +16,7 @@ def move_and_replace(src, dst):
     src = os.path.abspath(src)
     dst = os.path.abspath(dst)
 
-    for src_dir, dirs, files in os.walk(src):  # using os walk to navigate through the directory tree
+    for src_dir, _, files in os.walk(src):  # using os walk to navigate through the directory tree
         # keep te dir structure by replacing the source root to the destination on walked path
         dst_dir = src_dir.replace(src, dst)
 
@@ -35,19 +35,19 @@ def move_and_replace(src, dst):
     shutil.rmtree(src)  # remove the dir structure from the source
 
 
-def extract_file(file, path='.'):
-    if os.path.isfile(file):
-        if tarfile.is_tarfile(file):
-            with tarfile.open(file, 'r:gz') as tfile:
+def extract_file(compressed_file, path='.'):
+    if os.path.isfile(compressed_file):
+        if tarfile.is_tarfile(compressed_file):
+            with tarfile.open(compressed_file, 'r:gz') as tfile:
                 basename = tfile.members[0].name
                 tfile.extractall(path+'/')
-        elif zipfile.is_zipfile(file):
-            with zipfile.ZipFile(file, 'r') as zfile:
+        elif zipfile.is_zipfile(compressed_file):
+            with zipfile.ZipFile(compressed_file, 'r') as zfile:
                 basename = zfile.namelist()[0]
                 zfile.extractall(path)
         else:
             raise TypeError('File type not supported')
     else:
-        raise TypeError('{0} is not a valid file'.format(file))
+        raise TypeError('{0} is not a valid file'.format(compressed_file))
 
     return os.path.abspath(os.path.join(path, basename))

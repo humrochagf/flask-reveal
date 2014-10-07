@@ -20,8 +20,8 @@ def load_markdown_slides(path):
 
     slides = []
 
-    for file in sorted(glob.glob(os.path.join(path, '*.md'))):
-        with open(file, 'r') as sb:
+    for slide in sorted(glob.glob(os.path.join(path, '*.md'))):
+        with open(slide, 'r') as sb:
             slides.append(sb.read())
 
     return slides
