@@ -14,7 +14,7 @@ class CLI(argparse.ArgumentParser):
     })
 
     def __init__(self):
-        super().__init__(**self.info)
+        super(CLI, self).__init__(**self.info)
 
         self.subcommand = None
         self.subcommand_list = list_subcommands()
@@ -25,7 +25,7 @@ class CLI(argparse.ArgumentParser):
             self.epilog += '    {0}\n'.format(subcommand)
 
     def parse_known_args(self, args=None, namespace=None):
-        return super().parse_known_args(args, self)[1]
+        return super(CLI, self).parse_known_args(args, self)[1]
 
     def run(self, args=None):
         subcommand_args = self.parse_known_args(args)

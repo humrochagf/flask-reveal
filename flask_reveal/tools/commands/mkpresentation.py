@@ -13,13 +13,13 @@ class MkPresentation(argparse.ArgumentParser):
     })
 
     def __init__(self):
-        super().__init__(**self.info)
+        super(MkPresentation, self).__init__(**self.info)
 
         self.path = 'my_presentation'
         self.add_argument('path', nargs='?', default=self.path)
 
     def parse_args(self, args=None, namespace=None):
-        super().parse_args(args, self)
+        super(MkPresentation, self).parse_args(args, self)
 
     def run(self, args=None):
         self.parse_args(args)

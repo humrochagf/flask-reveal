@@ -14,7 +14,7 @@ class InstallReveal(argparse.ArgumentParser):
     })
 
     def __init__(self):
-        super().__init__(**self.info)
+        super(InstallReveal, self).__init__(**self.info)
 
         self.url = None
         self.path = None
@@ -22,7 +22,7 @@ class InstallReveal(argparse.ArgumentParser):
         self.add_argument('-p', '--path', action='store')
 
     def parse_args(self, args=None, namespace=None):
-        super().parse_args(args, self)
+        super(InstallReveal, self).parse_args(args, self)
 
     def run(self, args=None):
         self.parse_args(args)

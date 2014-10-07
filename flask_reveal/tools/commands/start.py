@@ -12,7 +12,7 @@ class Start(argparse.ArgumentParser):
     })
 
     def __init__(self):
-        super().__init__(**self.info)
+        super(Start, self).__init__(**self.info)
 
         self.path = os.getcwd()
         self.media = None
@@ -24,7 +24,7 @@ class Start(argparse.ArgumentParser):
         self.add_argument('-d', '--debug', action='store_true')
 
     def parse_args(self, args=None, namespace=None):
-        super().parse_args(args, self)
+        super(Start, self).parse_args(args, self)
         
         # Check for presentation root
         if os.path.isdir(self.path):
