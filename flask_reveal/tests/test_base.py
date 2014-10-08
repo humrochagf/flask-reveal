@@ -24,6 +24,11 @@ class BaseAppTestCase(unittest.TestCase):
     def tearDown(self):
         os.remove(self.config)
 
+    def test_start_invalid_config(self):
+        self.assertRaises(FileNotFoundError,
+                          self.app.start,
+                          '', '', 'invalid_file')
+
     def test_current_app(self):
         with self.app.app_context():
             self.assertEqual(current_app.name, 'flask_reveal')
@@ -52,4 +57,4 @@ class BaseAppTestCase(unittest.TestCase):
     def test_user_config_loading_invalid_config_file(self):
         self.assertRaises(FileNotFoundError,
                           self.app.load_user_config,
-                          '', '', 'somefile.py')
+                          '', '', 'invalid_file')
