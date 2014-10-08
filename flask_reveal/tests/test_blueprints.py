@@ -31,7 +31,7 @@ class BlueprintTestCase(unittest.TestCase):
                     config=config,
                     image=os.path.basename(image))
 
-    def create_test_client(self, presentation_root, media_root, config):
+    def create_client(self, presentation_root, media_root, config):
         app = FlaskReveal('flask_reveal')
 
         app.load_user_config(presentation_root, media_root, config)
@@ -46,17 +46,17 @@ class BlueprintTestCase(unittest.TestCase):
         shutil.rmtree(self.presentation['root'])
 
     def test_presentation_view_status(self):
-        client = self.create_test_client(self.presentation['root'],
-                                         self.presentation['media'],
-                                         self.presentation['config'])
+        client = self.create_client(self.presentation['root'],
+                                    self.presentation['media'],
+                                    self.presentation['config'])
 
         with client.get('/') as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_get_img_view_status(self):
-        client = self.create_test_client(self.presentation['root'],
-                                         self.presentation['media'],
-                                         self.presentation['config'])
+        client = self.create_client(self.presentation['root'],
+                                    self.presentation['media'],
+                                    self.presentation['config'])
         url = '/img/{0}'.format(self.presentation['image'])
 
         with client.get(url) as response:
