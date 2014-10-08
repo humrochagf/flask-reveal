@@ -17,11 +17,11 @@ class CLI(argparse.ArgumentParser):
         super(CLI, self).__init__(**self.info)
 
         self.subcommand = None
-        self.subcommand_list = list_subcommands()
+        self.subcommands = list_subcommands()
         self.add_argument('subcommand')
 
         self.epilog = '[subcommands]\n'
-        for subcommand in self.subcommand_list:
+        for subcommand in self.subcommands:
             self.epilog += '    {0}\n'.format(subcommand)
 
     def parse_known_args(self, args=None, namespace=None):
@@ -30,7 +30,7 @@ class CLI(argparse.ArgumentParser):
     def run(self, args=None):
         subcommand_args = self.parse_known_args(args)
 
-        if self.subcommand in self.subcommand_list:
+        if self.subcommand in self.subcommands:
             command = load_subcomand(self.subcommand)
 
             command.run(subcommand_args)
