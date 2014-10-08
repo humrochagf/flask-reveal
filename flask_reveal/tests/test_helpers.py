@@ -9,7 +9,7 @@ import tempfile
 from flask_reveal.tools.helpers import move_and_replace, extract_file
 
 
-class ToolsTestCase(unittest.TestCase):
+class HelpersTestCase(unittest.TestCase):
 
     def make_src(self, base):
         source = tempfile.mkdtemp(dir=base)
