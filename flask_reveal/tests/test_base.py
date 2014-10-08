@@ -30,12 +30,15 @@ class BaseAppTestCase(unittest.TestCase):
 
     def test_blueprint_loading(self):
         with self.app.app_context():
-            self.assertDictEqual(current_app.blueprints, {'reveal': reveal_blueprint})
+            self.assertDictEqual(current_app.blueprints,
+                                 {'reveal': reveal_blueprint})
 
     def test_default_config_loading(self):
         with self.app.app_context():
-            self.assertDictEqual(current_app.config['REVEAL_META'], REVEAL_META)
-            self.assertDictEqual(current_app.config['REVEAL_CONFIG'], REVEAL_CONFIG)
+            self.assertDictEqual(current_app.config['REVEAL_META'],
+                                 REVEAL_META)
+            self.assertDictEqual(current_app.config['REVEAL_CONFIG'],
+                                 REVEAL_CONFIG)
 
     def test_user_config_loading(self):
         with open(self.config, 'w') as config:
@@ -47,4 +50,6 @@ class BaseAppTestCase(unittest.TestCase):
             self.assertEqual(current_app.config['TEST_VAR'], 'TEST')
 
     def test_user_config_loading_invalid_config_file(self):
-        self.assertRaises(FileNotFoundError, self.app.load_user_config, '', '', 'somefile.py')
+        self.assertRaises(FileNotFoundError,
+                          self.app.load_user_config,
+                          '', '', 'somefile.py')

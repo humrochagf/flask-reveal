@@ -67,7 +67,8 @@ REVEAL_CONFIG = {
     'previewLinks': False,
 
     # Slide theme
-    'theme': 'default',  # default/beige/blood/moon/night/serif/simple/sky/solarized
+    # default/beige/blood/moon/night/serif/simple/sky/solarized
+    'theme': 'default',
 
     # Transition style
     'transition': 'default',  # default/cube/page/concave/zoom/linear/fade/none
@@ -82,7 +83,9 @@ REVEAL_CONFIG = {
     'viewDistance': 3,
 
     # Parallax background image
-    'parallaxBackgroundImage': '',  # e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+    # e.g.:
+    # "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+    'parallaxBackgroundImage': '',
 
     # Parallax background size
     'parallaxBackgroundSize': '',  # CSS syntax, e.g. "2100px 900px"

@@ -7,7 +7,8 @@ import zipfile
 
 def move_and_replace(src, dst):
     """
-    Helper function used to move files from one place to another, creating os replacing them if needed
+    Helper function used to move files from one place to another,
+    creating os replacing them if needed
 
     :param src: source directory
     :param dst: destination directory
@@ -16,8 +17,10 @@ def move_and_replace(src, dst):
     src = os.path.abspath(src)
     dst = os.path.abspath(dst)
 
-    for src_dir, _, files in os.walk(src):  # using os walk to navigate through the directory tree
-        # keep te dir structure by replacing the source root to the destination on walked path
+    for src_dir, _, files in os.walk(src):
+        # using os walk to navigate through the directory tree
+        # keep te dir structure by replacing the source root to
+        # the destination on walked path
         dst_dir = src_dir.replace(src, dst)
 
         if not os.path.exists(dst_dir):
@@ -48,6 +51,7 @@ def extract_file(compressed_file, path='.'):
         else:
             raise NotImplementedError('File type not supported')
     else:
-        raise FileNotFoundError('{0} is not a valid file'.format(compressed_file))
+        raise FileNotFoundError(
+            '{0} is not a valid file'.format(compressed_file))
 
     return os.path.abspath(os.path.join(path, basename))

@@ -29,7 +29,8 @@ setup(
     install_requires=[
         'Flask>=0.10',
     ],
-    entry_points=dict(console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
+    entry_points=dict(
+        console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
     cmdclass=dict(install=CustomInstall),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],
@@ -45,4 +46,3 @@ setup(
         'Topic :: Text Processing :: Markup :: HTML',
     ]
 )
-

@@ -57,8 +57,9 @@ class BlueprintTestCase(unittest.TestCase):
         client = self.create_test_client(self.presentation['root'],
                                          self.presentation['media'],
                                          self.presentation['config'])
+        url = '/img/{0}'.format(self.presentation['image'])
 
-        with client.get('/img/{0}'.format(self.presentation['image'])) as response:
+        with client.get(url) as response:
             self.assertEqual(response.status, '200 OK')
 
     def test_load_markdown_slides(self):

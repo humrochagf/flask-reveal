@@ -24,7 +24,8 @@ class MkPresentation(argparse.ArgumentParser):
     def run(self, args=None):
         self.parse_args(args)
 
-        config_file = os.path.join(os.path.dirname(config.__file__), 'config.py')
+        config_file = os.path.join(os.path.dirname(config.__file__),
+                                   'config.py')
 
         if not os.path.exists(self.path):
             presentation_name = os.path.basename(self.path)
@@ -34,7 +35,8 @@ class MkPresentation(argparse.ArgumentParser):
             shutil.copy(config_file, self.path)  # Config file
             # First slide file
             with open(os.path.join(self.path, 'slide000.md'), 'w') as f:
-                f.write('# {0}\n\nStart from here!'.format(presentation_name.replace('_', ' ').title()))
+                f.write('# {0}\n\nStart from here!'.format(
+                    presentation_name.replace('_', ' ').title()))
         else:
             raise FileExistsError('{0} folder already exists'.format(self.path))
 

@@ -52,7 +52,8 @@ class ToolsTestCase(unittest.TestCase):
         with zipfile.ZipFile(zip_file, 'w') as z:
             z.write(content, arcname='zipfolder')
             for item in os.listdir(content):
-                z.write(os.path.join(content, item), arcname=os.path.join('zipfolder', item))
+                z.write(os.path.join(content, item),
+                        arcname=os.path.join('zipfolder', item))
 
         return zip_file
 
@@ -83,7 +84,8 @@ class ToolsTestCase(unittest.TestCase):
         self.assertFalse(os.path.exists(self.source))
         # The replaced file should contain the data from the source file
         self.assertEqual(file_content, 'source')
-        # The moved files from source should be equal to the files on destination directory
+        # The moved files from source should be equal to the
+        # files on destination directory
         self.assertEqual(src_files, dst_files)
 
     def test_extract_file_tarfile(self):

@@ -12,4 +12,6 @@ def list_subcommands():
 
 
 def load_subcomand(subcommand):
-    return import_module('flask_reveal.tools.commands.{0}'.format(subcommand)).command
+    module = 'flask_reveal.tools.commands.{0}'.format(subcommand)
+
+    return import_module(module).command
