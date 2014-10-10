@@ -41,7 +41,6 @@ class CommandsTestCase(unittest.TestCase):
 
         return source
 
-
     def setUp(self):
         self.start = start.Start()
         self.install_reveal = installreveal.InstallReveal()
@@ -80,3 +79,7 @@ class CommandsTestCase(unittest.TestCase):
         self.mk_presentation.parse_args([])
 
         self.assertEqual(self.mk_presentation.path, 'my_presentation')
+
+    def test_mk_presentation_run_directory_exists(self):
+        self.assertRaises(FileExistsError, self.mk_presentation.run,
+                          [self.project_dir, ])
