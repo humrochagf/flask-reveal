@@ -2,6 +2,7 @@
 import sys
 import argparse
 
+import flask_reveal
 from flask_reveal.tools.commands import list_subcommands, load_subcomand
 
 
@@ -10,17 +11,25 @@ class CLI(argparse.ArgumentParser):
         'prog': 'flaskreveal',
         'description': 'An easy way to make reveal.js presentations',
         'formatter_class': argparse.RawDescriptionHelpFormatter,
-        'usage': '%(prog)s [-h] subcommand [options] [args]'
+        'usage': '%(prog)s [-h|v] subcommand [options] [args]'
     })
 
     def __init__(self):
         super(CLI, self).__init__(**self.info)
 
+        version = flask_reveal.__version__
+
         self.subcommand = None
         self.subcommands = list_subcommands()
+
         self.add_argument('subcommand')
+        self.add_argument('-v', '--version',
+                          action='version',
+                          version='flask_reveal {0}'.format(version),
+                          help='show the program version')
 
         self.epilog = '[subcommands]\n'
+
         for subcommand in self.subcommands:
             self.epilog += '    {0}\n'.format(subcommand)
 
