@@ -1,6 +1,6 @@
 # Flask Reveal
 
-[![Build Status](https://travis-ci.org/humrochagf/flask-reveal.svg?branch=master)](https://travis-ci.org/humrochagf/flask-reveal) [![Coverage Status](https://coveralls.io/repos/humrochagf/flask-reveal/badge.png?branch=master)](https://coveralls.io/r/humrochagf/flask-reveal?branch=master) [![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.png)](https://landscape.io/github/humrochagf/flask-reveal/master)
+[![Build Status](https://travis-ci.org/humrochagf/flask-reveal.svg?branch=master)](https://travis-ci.org/humrochagf/flask-reveal) [![Coverage Status](https://coveralls.io/repos/humrochagf/flask-reveal/badge.png?branch=master)](https://coveralls.io/r/humrochagf/flask-reveal?branch=master) [![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.png)](https://landscape.io/github/humrochagf/flask-reveal/master) [![Stories in Ready](https://badge.waffle.io/humrochagf/flask-reveal.png?label=ready&title=Ready)](https://waffle.io/humrochagf/flask-reveal)
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
