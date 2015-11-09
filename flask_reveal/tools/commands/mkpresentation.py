@@ -39,6 +39,7 @@ class MkPresentation(argparse.ArgumentParser):
                 f.write('# {0}\n\nStart from here!'.format(
                     presentation_name.replace('_', ' ').title()))
         else:
-            raise FileExistsError('{0} folder already exists'.format(self.path))
+            raise FileExistsError(
+                '{0} folder already exists'.format(self.path))
 
 command = MkPresentation()

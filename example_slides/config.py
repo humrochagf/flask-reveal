@@ -71,13 +71,16 @@ REVEAL_CONFIG = {
     'theme': 'default',
 
     # Transition style
-    'transition': 'default',  # default/cube/page/concave/zoom/linear/fade/none
+    # default/cube/page/concave/zoom/linear/fade/none
+    'transition': 'default',
 
     # Transition speed
-    'transitionSpeed': 'default',  # default/fast/slow
+    # default/fast/slow
+    'transitionSpeed': 'default',
 
     # Transition style for full page slide backgrounds
-    'backgroundTransition': 'default',  # default/none/slide/concave/convex/zoom
+    # default/none/slide/concave/convex/zoom
+    'backgroundTransition': 'default',
 
     # Number of slides away from the current that are visible
     'viewDistance': 3,

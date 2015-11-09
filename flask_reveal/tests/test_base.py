@@ -10,7 +10,6 @@ from flask_reveal.blueprints.reveal import reveal_blueprint
 from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
 
 
-
 class BaseAppTestCase(unittest.TestCase):
 
     def setUp(self):
