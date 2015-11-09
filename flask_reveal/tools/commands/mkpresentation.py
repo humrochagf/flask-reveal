@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+
+import argparse
 import os
 import shutil
-import argparse
 
 import flask_reveal.config as config
 

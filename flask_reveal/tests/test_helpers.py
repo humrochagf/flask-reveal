@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-import os
-import tarfile
-import zipfile
-import shutil
-import unittest
-import tempfile
 
-from flask_reveal.tools.helpers import move_and_replace, extract_file
+import os
+import shutil
+import tarfile
+import tempfile
+import unittest
+import zipfile
+
+from flask_reveal.tools.helpers import extract_file, move_and_replace
 
 
 class HelpersTestCase(unittest.TestCase):

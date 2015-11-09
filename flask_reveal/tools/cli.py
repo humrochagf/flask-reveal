@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
+
 import argparse
+import sys
 
 import flask_reveal
 from flask_reveal.tools.commands import list_subcommands, load_subcomand

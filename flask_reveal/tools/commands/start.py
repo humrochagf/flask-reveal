@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import os
+
 import argparse
+import os
 
 from flask_reveal.app import FlaskReveal
 

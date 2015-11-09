@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+
 import os
-import unittest
 import tempfile
+import unittest
 
 from flask import current_app
-
 from flask_reveal.app import FlaskReveal
-from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
 from flask_reveal.blueprints.reveal import reveal_blueprint
+from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
+
 
 
 class BaseAppTestCase(unittest.TestCase):

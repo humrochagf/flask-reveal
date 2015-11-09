@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-import os
+
 import argparse
+import os
 from urllib import request
 
 import flask_reveal
-from flask_reveal.tools.helpers import move_and_replace, extract_file
+from flask_reveal.tools.helpers import extract_file, move_and_replace
 
 
 class InstallReveal(argparse.ArgumentParser):

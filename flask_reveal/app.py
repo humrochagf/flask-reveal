@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from flask import Flask
 
 from .blueprints.reveal import reveal_blueprint
@@ -6,7 +7,8 @@ from .blueprints.reveal import reveal_blueprint
 
 class FlaskReveal(Flask):
     """
-    Class that extends the Flask class loads the project specific configurations
+    Class that extends the Flask class loads the project
+    specific configurations
     """
 
     def __init__(self, import_name, **kwargs):

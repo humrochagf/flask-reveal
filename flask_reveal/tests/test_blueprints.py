@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+
 import os
 import shutil
-import unittest
 import tempfile
+import unittest
 
 from flask_reveal.app import FlaskReveal
 from flask_reveal.blueprints.reveal import load_markdown_slides

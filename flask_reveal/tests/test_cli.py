@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+
 import os
 import shutil
-import unittest
 import tempfile
+import unittest
 
 from flask_reveal.tools.cli import CLI
-from flask_reveal.tools.commands import load_subcomand, start, installreveal, mkpresentation
+from flask_reveal.tools.commands import (installreveal, load_subcomand,
+                                         mkpresentation, start)
 
 
 class CLITestCase(unittest.TestCase):

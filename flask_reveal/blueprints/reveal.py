@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import os
-import glob
 
-from flask import Blueprint, render_template, current_app, send_from_directory
+import glob
+import os
+
+from flask import Blueprint, current_app, render_template, send_from_directory
 
 
 reveal_blueprint = Blueprint('reveal', __name__)
