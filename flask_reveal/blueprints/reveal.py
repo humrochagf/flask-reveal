@@ -3,7 +3,8 @@
 import glob
 import os
 
-from flask import Blueprint, current_app, render_template, send_from_directory
+from flask import (Blueprint, current_app, render_template,
+                   send_from_directory, url_for)
 
 
 reveal_blueprint = Blueprint('reveal', __name__)
@@ -49,11 +50,15 @@ def presentation():
     meta = current_app.config.get('REVEAL_META')
     slides = load_markdown_slides(current_app.config.get('PRESENTATION_ROOT'))
     config = current_app.config.get('REVEAL_CONFIG')
+    theme = (url_for('static', filename='css/theme/') +
+             current_app.config.get('REVEAL_THEME') +
+             '.css')
 
     context = {
         'meta': meta,
         'slides': slides,
         'config': config,
+        'theme': theme,
     }
 
     return render_template('presentation.html', **context)

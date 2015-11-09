@@ -11,6 +11,11 @@ REVEAL_META = {
     'description': 'Some description'
 }
 
+# Themes
+# beige, black, blood, league, moon, night, serif, simple, sky,
+# solarized, white
+REVEAL_THEME = 'black'
+
 REVEAL_CONFIG = {
     # Display controls in the bottom right corner
     'controls': True,
@@ -49,6 +54,13 @@ REVEAL_CONFIG = {
     # i.e. contained within a limited portion of the screen
     'embedded': False,
 
+    # Flags if we should show a help overlay when the questionmark
+    # key is pressed
+    'help': True,
+
+    # Flags if speaker notes should be visible to all viewers
+    'showNotes': False,
+
     # Number of milliseconds between automatically proceeding to the
     # next slide, disabled when set to 0, this value can be overwritten
     # by using a data-autoslide attribute on your slides
@@ -65,10 +77,6 @@ REVEAL_CONFIG = {
 
     # Opens links in an iframe preview overlay
     'previewLinks': False,
-
-    # Slide theme
-    # default/beige/blood/moon/night/serif/simple/sky/solarized
-    'theme': 'default',
 
     # Transition style
     # default/cube/page/concave/zoom/linear/fade/none
@@ -91,4 +99,10 @@ REVEAL_CONFIG = {
 
     # Parallax background size
     'parallaxBackgroundSize': '',  # CSS syntax, e.g. "2100px 900px"
+
+    # Amount to move parallax background (horizontal and vertical)
+    # on slide change
+    # Number, e.g. 100
+    'parallaxBackgroundHorizontal': '',
+    'parallaxBackgroundVertical': '',
 }
