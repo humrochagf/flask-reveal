@@ -108,6 +108,16 @@ REVEAL_META = {
     'description': 'Some description'
 }
 ```
+
+**REVEAL_THEME**: string with reveal theme of choice
+
+```python
+# Themes
+# beige, black, blood, league, moon, night, serif, simple, sky,
+# solarized, white
+REVEAL_THEME = 'black'
+```
+
 **REVEAL_CONFIG**: python dictionary with the [reveal.js configuration attributes](https://github.com/hakimel/reveal.js/#configuration) but using python types (e.g.: true is python boolean True)
 
 ```python
@@ -137,7 +147,7 @@ REVEAL_CONFIG = {
     'touch': True,
 
     # Loop the presentation
-    'loop': True,
+    'loop': False,
 
     # Change the presentation direction to be RTL
     'rtl': False,
@@ -149,12 +159,19 @@ REVEAL_CONFIG = {
     # i.e. contained within a limited portion of the screen
     'embedded': False,
 
+    # Flags if we should show a help overlay when the questionmark
+    # key is pressed
+    'help': True,
+
+    # Flags if speaker notes should be visible to all viewers
+    'showNotes': False,
+
     # Number of milliseconds between automatically proceeding to the
     # next slide, disabled when set to 0, this value can be overwritten
     # by using a data-autoslide attribute on your slides
     'autoSlide': 0,
 
-     # Stop auto-sliding after user input
+    # Stop auto-sliding after user input
     'autoSlideStoppable': True,
 
     # Enable slide navigation via mouse wheel
@@ -166,26 +183,33 @@ REVEAL_CONFIG = {
     # Opens links in an iframe preview overlay
     'previewLinks': False,
 
-    # Slide theme
-    'theme': 'default',  # default/beige/blood/moon/night/serif/simple/sky/solarized
-
     # Transition style
-    'transition': 'default',  # default/cube/page/concave/zoom/linear/fade/none
+    # default/cube/page/concave/zoom/linear/fade/none
+    'transition': 'default',
 
     # Transition speed
     'transitionSpeed': 'default',  # default/fast/slow
 
     # Transition style for full page slide backgrounds
-    'backgroundTransition': 'default',  # default/none/slide/concave/convex/zoom
+    # default/none/slide/concave/convex/zoom
+    'backgroundTransition': 'default',
 
     # Number of slides away from the current that are visible
     'viewDistance': 3,
 
     # Parallax background image
-    'parallaxBackgroundImage': '',  # e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+    # e.g.:
+    # "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+    'parallaxBackgroundImage': '',
 
     # Parallax background size
     'parallaxBackgroundSize': '',  # CSS syntax, e.g. "2100px 900px"
+
+    # Amount to move parallax background (horizontal and vertical)
+    # on slide change
+    # Number, e.g. 100
+    'parallaxBackgroundHorizontal': '',
+    'parallaxBackgroundVertical': '',
 }
 ```
 
