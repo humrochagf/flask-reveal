@@ -56,21 +56,6 @@ To create a new presentation run:
 flaskreveal mkpresentation [NAME]
 ```
 
-### PDF Export
-
-Presentations can be exported to PDF via a special print stylesheet. This feature will be described using [Google Chrome](https://google.com/chrome) or [Chromium](https://www.chromium.org/Home), but I got the same results using [Firefox](https://www.mozilla.org/en-US/firefox/new/).
-
-1. Run the presentation with flask-reveal.
-2. Open your brownser with the `print-pdf` as query string like : `localhost:5000/?print-pdf`.
-3. Open the in-browser print dialog (CTRL+P or CMD+P).
-4. Change the **Destination** setting to **Save as PDF**.
-5. Change the **Layout** to **Landscape**.
-6. Change the **Margins** to **None**.
-7. Enable the **Background graphics** option.
-8. Click **Save**.
-
-Alternatively you can use the [decktape](https://github.com/astefanutti/decktape) project.
-
 ### Install/Update reveal.js files
 
 If you need for some reason reinstall reveal.js files, just run the following command:
@@ -92,6 +77,21 @@ flaskreveal installreveal -f FILE
 ```
 
 Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
+
+### PDF Export
+
+Presentations can be exported to PDF via a special print stylesheet. This feature will be described using [Google Chrome](https://google.com/chrome) or [Chromium](https://www.chromium.org/Home), but I got the same results using [Firefox](https://www.mozilla.org/en-US/firefox/new/).
+
+1. Run the presentation with flask-reveal.
+2. Open your brownser with the `print-pdf` as query string like : `localhost:5000/?print-pdf`.
+3. Open the in-browser print dialog (CTRL+P or CMD+P).
+4. Change the **Destination** setting to **Save as PDF**.
+5. Change the **Layout** to **Landscape**.
+6. Change the **Margins** to **None**.
+7. Enable the **Background graphics** option.
+8. Click **Save**.
+
+Alternatively you can use the [decktape](https://github.com/astefanutti/decktape) project.
 
 ## Presentation Setup
 
