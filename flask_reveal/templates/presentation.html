@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <!-- Presentation Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reveal.css') }}">
@@ -22,16 +22,13 @@
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="{{ url_for('static', filename='lib/css/zenburn.css') }}">
 
-    <!-- Scripts loaded before the body -->
-    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <!-- Printing and PDF exports -->
     <script>
-      if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '{{ url_for("static", filename="css/print/pdf.css") }}';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-      }
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? "{{ url_for('static', filename='css/print/pdf.css') }}" : "{{ url_for('static', filename='css/print/paper.css') }}";
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
 
     <!--[if lt IE 9]>
@@ -65,14 +62,14 @@
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
         {% for config_name, value in config.items() %}
-          {% if value == true %}
+          {% if value is True %}
             {{ config_name }}: true,
-          {% elif value == false %}
+          {% elif value is False %}
             {{ config_name }}: false,
-          {% elif value is number %}
-            {{ config_name }}: {{ value }},
-          {% else %}
+          {% elif type(value) is str %}
             {{ config_name }}: '{{ value }}',
+          {% else %}
+            {{ config_name }}: {{ value }},
           {% endif %}
         {% endfor %}
 
@@ -82,8 +79,8 @@
           { src: '{{ url_for("static", filename="plugin/markdown/marked.js") }}', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: '{{ url_for("static", filename="plugin/markdown/markdown.js") }}', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: '{{ url_for("static", filename="plugin/highlight/highlight.js") }}', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: '{{ url_for("static", filename="plugin/zoom-js/zoom.js") }}', async: true, condition: function() { return !!document.body.classList; } },
-          { src: '{{ url_for("static", filename="plugin/notes/notes.js") }}', async: true, condition: function() { return !!document.body.classList; } }
+          { src: '{{ url_for("static", filename="plugin/zoom-js/zoom.js") }}', async: true },
+          { src: '{{ url_for("static", filename="plugin/notes/notes.js") }}', async: true }
         ]
       });
     </script>

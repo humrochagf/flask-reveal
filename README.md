@@ -56,6 +56,21 @@ To create a new presentation run:
 flaskreveal mkpresentation [NAME]
 ```
 
+### PDF Export
+
+Presentations can be exported to PDF via a special print stylesheet. This feature will be described using [Google Chrome](https://google.com/chrome) or [Chromium](https://www.chromium.org/Home), but I got the same results using [Firefox](https://www.mozilla.org/en-US/firefox/new/).
+
+1. Run the presentation with flask-reveal.
+2. Open your brownser with the `print-pdf` as query string like : `localhost:5000/?print-pdf`.
+3. Open the in-browser print dialog (CTRL+P or CMD+P).
+4. Change the **Destination** setting to **Save as PDF**.
+5. Change the **Layout** to **Landscape**.
+6. Change the **Margins** to **None**.
+7. Enable the **Background graphics** option.
+8. Click **Save**.
+
+Alternatively you can use the [decktape](https://github.com/astefanutti/decktape) project.
+
 ### Install/Update reveal.js files
 
 If you need for some reason reinstall reveal.js files, just run the following command:
@@ -87,6 +102,14 @@ The flask-reveal checks for three things on your presentation folder.
 These are your presentation files written using markdown with some especial tags described on [markdown section](#markdown) and are placed on your presentation root folder.
 
 The file loading is done by alphabetical order, so make sure they are ordered.
+
+### The 'img' folder
+
+All images used on your presentation are placed inside the **'img'** folder and referenced on your slides starting from your presentation root.
+
+```markdown
+![Python Logo](img/python.png)
+```
 
 ### The 'config.py' File
 
@@ -211,14 +234,6 @@ REVEAL_CONFIG = {
     'parallaxBackgroundHorizontal': '',
     'parallaxBackgroundVertical': '',
 }
-```
-
-### The 'img' folder
-
-All images used on your presentation are placed inside the **'img'** folder and referenced on your slides starting from your presentation root.
-
-```markdown
-![Python Logo](img/python.png)
 ```
 
 ## Markdown
