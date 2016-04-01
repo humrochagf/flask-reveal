@@ -62,14 +62,14 @@
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
         {% for config_name, value in config.items() %}
-          {% if value is True %}
+          {% if value == true %}
             {{ config_name }}: true,
-          {% elif value is False %}
+          {% elif value == false %}
             {{ config_name }}: false,
-          {% elif type(value) is str %}
-            {{ config_name }}: '{{ value }}',
-          {% else %}
+          {% elif value is number %}
             {{ config_name }}: {{ value }},
+          {% else %}
+            {{ config_name }}: '{{ value }}',
           {% endif %}
         {% endfor %}
 
