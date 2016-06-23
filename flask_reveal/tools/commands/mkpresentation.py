@@ -35,7 +35,7 @@ class MkPresentation(argparse.ArgumentParser):
             os.mkdir(os.path.join(self.path, 'img'))  # Images dir
             shutil.copy(config_file, self.path)  # Config file
             # First slide file
-            with open(os.path.join(self.path, 'slide000.md'), 'w') as f:
+            with open(os.path.join(self.path, 'slides.md'), 'w') as f:
                 f.write('# {0}\n\nStart from here!'.format(
                     presentation_name.replace('_', ' ').title()))
         else:

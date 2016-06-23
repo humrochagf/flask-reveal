@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from flask_reveal.app import FlaskReveal
-from flask_reveal.blueprints.reveal import load_markdown_slides
+from flask_reveal.blueprints.reveal import load_markdown_slide
 
 
 class BlueprintTestCase(unittest.TestCase):
@@ -63,7 +63,7 @@ class BlueprintTestCase(unittest.TestCase):
         with client.get(url) as response:
             self.assertEqual(response.status, '200 OK')
 
-    def test_load_markdown_slides(self):
-        slides = load_markdown_slides(self.presentation['root'])
+    def test_load_markdown_slide(self):
+        slides = load_markdown_slide(self.presentation['root'])
 
         self.assertEqual(slides, self.slides)
