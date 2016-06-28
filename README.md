@@ -33,6 +33,11 @@ Go to created folder and run:
 ```
 python setup.py install
 ```
+or if you are using makefiles :
+```
+make install
+```
+
 
 ## Usage
 
@@ -93,15 +98,37 @@ Presentations can be exported to PDF via a special print stylesheet. This featur
 
 Alternatively you can use the [decktape](https://github.com/astefanutti/decktape) project.
 
+### Share your presentation using [Ngrok](https://ngrok.com/)
+
+You can easily share your presentation using [Ngrok](https://ngrok.com/). Download it, and put the binary file at root. Then you can do :
+```sh
+ngrok http 5000
+```
+This assume `5000` is your localhost.
+`ngrok` will create a secure tunnel to your localhost : 
+
+```sh
+ngrok by @inconshreveable                                              (Ctrl+C to quit)
+
+Tunnel Status                 online
+Version                       2.0.19/2.1.1
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://323744c6.ngrok.io -> localhost:5000
+Forwarding                    https://323744c6.ngrok.io -> localhost:5000
+
+Connections                   ttl     opn     rt1     rt5     p50     p90
+                              0       0       0.00    0.00    0.00    0.00
+```
+
 ## Presentation Setup
 
 The flask-reveal checks for three things on your presentation folder.
 
-### The '.md' Files
+### The 'slides.md' File
 
-These are your presentation files written using markdown with some especial tags described on [markdown section](#markdown) and are placed on your presentation root folder.
+This is your presentation file written using markdown with some especial tags described on [markdown section](#markdown) and is placed on your presentation root folder.
 
-The file loading is done by alphabetical order, so make sure they are ordered.
+Split your slides by setting up a *slide separator* into **REVEAL_CONFIG**. Default separator is `---`.
 
 ### The 'img' folder
 
@@ -145,6 +172,9 @@ REVEAL_THEME = 'black'
 
 ```python
 REVEAL_CONFIG = {
+    # Slide separator
+    'slideSep': '---',
+
     # Display controls in the bottom right corner
     'controls': True,
 

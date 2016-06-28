@@ -17,6 +17,9 @@ REVEAL_META = {
 REVEAL_THEME = 'black'
 
 REVEAL_CONFIG = {
+    # Slide separator
+    'slideSep': '---',
+
     # Display controls in the bottom right corner
     'controls': True,
 

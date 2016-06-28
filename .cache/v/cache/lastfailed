@@ -1,0 +1,9 @@
+{
+  "build/lib/flask_reveal/tests/test_base.py": true,
+  "build/lib/flask_reveal/tests/test_blueprints.py": true,
+  "build/lib/flask_reveal/tests/test_cli.py": true,
+  "flask_reveal/tests/test_base.py": true,
+  "flask_reveal/tests/test_blueprints.py": true,
+  "flask_reveal/tests/test_cli.py": true,
+  "flask_reveal/tests/test_helpers.py": true
+}

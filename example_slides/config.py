@@ -14,17 +14,17 @@ REVEAL_META = {
 # Themes
 # beige, black, blood, league, moon, night, serif, simple, sky,
 # solarized, white
-REVEAL_THEME = 'black'
+REVEAL_THEME = 'sky'
 
 REVEAL_CONFIG = {
     # Display controls in the bottom right corner
-    'controls': True,
+    'controls': False,
 
     # Display a presentation progress bar
     'progress': True,
 
     # Display the page number of the current slide
-    'slideNumber': False,
+    'slideNumber': True,
 
     # Push each slide change to the browser history
     'history': True,
@@ -87,7 +87,7 @@ REVEAL_CONFIG = {
 
     # Transition style for full page slide backgrounds
     # default/none/slide/concave/convex/zoom
-    'backgroundTransition': 'default',
+    'backgroundTransition': 'convex',
 
     # Number of slides away from the current that are visible
     'viewDistance': 3,
