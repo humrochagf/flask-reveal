@@ -46,10 +46,10 @@ make install
 To start your presentation run:
 
 ```
-flaskreveal start [PATH] [-m=MEDIA | --media=MEDIA] [-d | --debug]
+flaskreveal start [-m=MEDIA | --media=MEDIA] [-d | --debug] PATH
 ```
 
-Running without the `PATH` information, it will do the presentation files lookup inside the current directory.
+The `PATH` is the path to the markdown presentation file.
 
 The `MEDIA` value sets custom media folder. If not passed, sets to default **img\** folder inside the presentation folder.
 

@@ -19,7 +19,7 @@ class Start(argparse.ArgumentParser):
         self.media = None
         self.config = None
         self.debug = False
-        self.add_argument('path', nargs='?', default=self.path)
+        self.add_argument('path', default=self.path)
         self.add_argument('-m', '--media',  default=self.media)
         self.add_argument('-c', '--config', default=self.config)
         self.add_argument('-d', '--debug', action='store_true')
