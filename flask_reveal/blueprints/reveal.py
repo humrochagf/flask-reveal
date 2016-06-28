@@ -2,6 +2,7 @@
 
 import glob
 import os
+import re
 
 from flask import (Blueprint, current_app, render_template,
                    send_from_directory, url_for)
@@ -23,7 +24,7 @@ def load_markdown_slide(path, separator):
     with open(path, 'r') as sb:
         slides = sb.read()
 
-    return slides.split(separator)
+    return re.split('^{}$'.format(separator), slides, flags=re.MULTILINE)
 
 
 @reveal_blueprint.route('/img/<path:filename>')
