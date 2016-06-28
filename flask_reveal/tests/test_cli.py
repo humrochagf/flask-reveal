@@ -41,6 +41,9 @@ class CommandsTestCase(unittest.TestCase):
         with open(os.path.join(source, 'config.py'), 'w') as f:
             f.write('# test')
 
+        with open(os.path.join(source, 'slides.md'), 'w') as f:
+            f.write('# test')
+
         return source
 
     def setUp(self):
@@ -48,14 +51,15 @@ class CommandsTestCase(unittest.TestCase):
         self.install_reveal = installreveal.InstallReveal()
         self.mk_presentation = mkpresentation.MkPresentation()
         self.project_dir = self.mk_project_structure()
+        self.project_file = os.path.join(self.project_dir, 'slides.md')
 
     def tearDown(self):
         shutil.rmtree(self.project_dir)
 
     def test_start_parse_args(self):
-        self.start.parse_args([self.project_dir, ])
+        self.start.parse_args([self.project_file, ])
 
-        self.assertEqual(self.start.path, self.project_dir)
+        self.assertEqual(self.start.path, self.project_file)
         self.assertEqual(self.start.media,
                          os.path.join(self.project_dir, 'img'))
         self.assertEqual(self.start.config,
@@ -63,11 +67,11 @@ class CommandsTestCase(unittest.TestCase):
 
     def test_start_parse_args_invalid_img_root(self):
         self.assertRaises(NotADirectoryError, self.start.parse_args,
-                          [self.project_dir, '-m invalid_media'])
+                          [self.project_file, '-m invalid_media'])
 
-    def test_start_parse_args_invalid_root(self):
-        self.assertRaises(NotADirectoryError, self.start.parse_args,
-                          ['invalid_root', ])
+    def test_start_parse_args_invalid_file(self):
+        self.assertRaises(FileNotFoundError, self.start.parse_args,
+                          ['invalid_file', ])
 
     def test_install_reveal_parse_args(self):
         self.install_reveal.parse_args([])

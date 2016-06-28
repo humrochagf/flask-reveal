@@ -10,7 +10,7 @@ from flask_reveal.blueprints.reveal import load_markdown_slide
 
 
 class BlueprintTestCase(unittest.TestCase):
-    slides = ['Slide1', 'Slide2', 'Slide3']
+    slides = 'Slide1\n---\nSlide2\n---\nSlide3'
 
     def create_presentation_structure(self, slides=None):
         root = tempfile.mkdtemp()
@@ -22,20 +22,21 @@ class BlueprintTestCase(unittest.TestCase):
         os.close(fd_cfg)
         os.close(fd_img)
 
-        for index, slide in enumerate(slides):
-            fd, _ = tempfile.mkstemp('.md', str(index), root)
-            with os.fdopen(fd, 'w') as file:
-                file.write(slide)
+        fd, presentation_file = tempfile.mkstemp('.md', dir=root)
 
-        return dict(root=root,
+        with os.fdopen(fd, 'w') as file:
+            file.write(slides)
+
+        return dict(presentation_file=presentation_file,
+                    root=root,
                     media=media,
                     config=config,
                     image=os.path.basename(image))
 
-    def create_client(self, presentation_root, media_root, config):
+    def create_client(self, presentation_file, media_root, config):
         app = FlaskReveal('flask_reveal')
 
-        app.load_user_config(presentation_root, media_root, config)
+        app.load_user_config(presentation_file, media_root, config)
         app.config['TESTING'] = True
 
         return app.test_client()
@@ -47,7 +48,7 @@ class BlueprintTestCase(unittest.TestCase):
         shutil.rmtree(self.presentation['root'])
 
     def test_presentation_view_status(self):
-        client = self.create_client(self.presentation['root'],
+        client = self.create_client(self.presentation['presentation_file'],
                                     self.presentation['media'],
                                     self.presentation['config'])
 
@@ -55,7 +56,7 @@ class BlueprintTestCase(unittest.TestCase):
             self.assertEqual(response.status, '200 OK')
 
     def test_get_img_view_status(self):
-        client = self.create_client(self.presentation['root'],
+        client = self.create_client(self.presentation['presentation_file'],
                                     self.presentation['media'],
                                     self.presentation['config'])
         url = '/img/{0}'.format(self.presentation['image'])
@@ -64,6 +65,7 @@ class BlueprintTestCase(unittest.TestCase):
             self.assertEqual(response.status, '200 OK')
 
     def test_load_markdown_slide(self):
-        slides = load_markdown_slide(self.presentation['root'])
+        slides = load_markdown_slide(self.presentation['presentation_file'],
+                                     '---')
 
-        self.assertEqual(slides, self.slides)
+        self.assertEqual(slides, ['Slide1\n', '\nSlide2\n', '\nSlide3'])

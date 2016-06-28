@@ -6,16 +6,13 @@ import os
 from flask import (Blueprint, current_app, render_template,
                    send_from_directory, url_for)
 
-REVEAL_CONFIG = current_app.config.get('REVEAL_CONFIG')
-
-
 reveal_blueprint = Blueprint('reveal', __name__)
 
 
-def load_markdown_slide(path):
+def load_markdown_slide(path, separator):
     """
-    Get slides file in the current directory, load it and split 
-    it into list of slides.
+    Get slides file from the given path, loads it and split into list
+    of slides.
 
     The slide page must be on markdown format having ".md" extension.
     Slide separator must be defined into `config.py`
@@ -23,10 +20,10 @@ def load_markdown_slide(path):
     :return: a list of strings with the slides content
     """
 
-    with open(os.path.join(path, 'slides.md'), 'r') as sb:
+    with open(path, 'r') as sb:
         slides = sb.read()
 
-    return slides.split(REVEAL_CONFIG.get('slideSep', '---'))
+    return slides.split(separator)
 
 
 @reveal_blueprint.route('/img/<path:filename>')
@@ -48,8 +45,9 @@ def presentation():
     """
 
     meta = current_app.config.get('REVEAL_META')
-    slides = load_markdown_slide(current_app.config.get('PRESENTATION_ROOT'))
     config = current_app.config.get('REVEAL_CONFIG')
+    slides = load_markdown_slide(current_app.config.get('PRESENTATION_FILE'),
+                                 config.get('slideSep', '---'))
     theme = (url_for('static', filename='css/theme/') +
              current_app.config.get('REVEAL_THEME') +
              '.css')

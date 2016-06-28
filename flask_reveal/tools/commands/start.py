@@ -27,18 +27,19 @@ class Start(argparse.ArgumentParser):
     def parse_args(self, args=None, namespace=None):
         super(Start, self).parse_args(args, self)
 
-        # Check for presentation root
-        if os.path.isdir(self.path):
+        # Check for presentation file
+        if os.path.isfile(self.path):
             self.path = os.path.abspath(self.path)
 
             # Check for media root
             if not self.media:
-                self.media = os.path.join(self.path, 'img')
+                self.media = os.path.join(os.path.dirname(self.path), 'img')
 
             if os.path.isdir(self.media):
                 # Check for configuration file
                 if not self.config:
-                    self.config = os.path.join(self.path, 'config.py')
+                    self.config = os.path.join(os.path.dirname(self.path),
+                                               'config.py')
 
                 if not os.path.isfile(self.config):
                     # Running without configuration file
@@ -52,8 +53,8 @@ class Start(argparse.ArgumentParser):
                     'your media path {0} is not a valid directory'.format(
                         self.media))
         else:
-            raise NotADirectoryError(
-                'your presentation path {0} is not a valid directory'.format(
+            raise FileNotFoundError(
+                'presentation file {0} not found'.format(
                     self.path))
 
     def run(self, args=None):
