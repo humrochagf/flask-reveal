@@ -26,8 +26,8 @@ class InstallReveal(argparse.ArgumentParser):
         super(InstallReveal, self).parse_args(args, self)
 
         if not self.url and not self.path:
-            self.url = 'https://github.com/hakimel/reveal.js/' + \
-                       'archive/3.2.0.tar.gz'
+            self.url = ('https://github.com/hakimel/reveal.js/' +
+                        'archive/3.3.0.tar.gz')
 
     def run(self, args=None):
         self.parse_args(args)
