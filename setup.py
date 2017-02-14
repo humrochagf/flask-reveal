@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
     test_suite="flask_reveal.tests",
     install_requires=[
-        'Flask>=0.10',
+        'Flask>=0.12',
     ],
     entry_points=dict(
         console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
