@@ -26,7 +26,7 @@ test: # run tests
 
 .PHONY: cover
 cover: # coverage tests
-	coverage run --source=. setup.py test
+	coverage run --source=. setup.py test && coverage report -m
 
 .PHONY: clean
 clean: # remove temporary files and artifacts
