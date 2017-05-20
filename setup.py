@@ -27,7 +27,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    test_suite="flask_reveal.tests",
     install_requires=[
         'Flask>=0.12',
     ],

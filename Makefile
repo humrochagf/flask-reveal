@@ -10,11 +10,12 @@ BUILD_TIME := $(shell date +%FT%T%z)
 
 .PHONY: install
 install: # system-wide standard python installation
-	python setup.py install
+	pip install .
 
 .PHONY: install.hack
 install.hack: # install development requirements
 	pip install -r requirements.txt
+	pip install -e .
 
 .PHONY: lint
 lint: # lint code
@@ -22,11 +23,11 @@ lint: # lint code
 
 .PHONY: test
 test: # run tests
-	python setup.py test
+	nosetests tests
 
 .PHONY: cover
 cover: # coverage tests
-	coverage run --source=. setup.py test && coverage report -m
+	nosetests -w tests --with-coverage --cover-package=flask_reveal
 
 .PHONY: clean
 clean: # remove temporary files and artifacts
