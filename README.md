@@ -4,15 +4,6 @@
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
-## Project milestones
-
-This are the milestones to the project release:
-
-- ~~Remove the docopt dependencies~~
-- ~~Make tests for the project~~
-- ~~Better version handling~~
-- ~~Python 2.7 backport~~
-
 ## Requirements
 
 The current version of flask-reveal runs on python 3.x
