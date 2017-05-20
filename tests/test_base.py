@@ -9,6 +9,13 @@ from flask_reveal.app import FlaskReveal
 from flask_reveal.blueprints.reveal import reveal_blueprint
 from flask_reveal.config import REVEAL_CONFIG, REVEAL_META
 
+try:
+    # Python 3
+    FileNotFoundError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+
 
 class BaseAppTestCase(unittest.TestCase):
 

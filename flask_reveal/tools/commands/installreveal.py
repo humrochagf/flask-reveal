@@ -2,7 +2,13 @@
 
 import argparse
 import os
-from urllib import request
+
+try:
+    # python 3
+    from urllib.request import urlretrieve
+except ImportError:
+    # python 2
+    from urllib import urlretrieve
 
 import flask_reveal
 from flask_reveal.tools.helpers import extract_file, move_and_replace
@@ -34,7 +40,7 @@ class InstallReveal(argparse.ArgumentParser):
 
         if self.url:
             try:
-                response = request.urlretrieve(self.url)
+                response = urlretrieve(self.url)
                 self.path = response[0]
             except Exception:
                 raise

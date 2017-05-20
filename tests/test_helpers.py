@@ -9,6 +9,13 @@ import zipfile
 
 from flask_reveal.tools.helpers import extract_file, move_and_replace
 
+try:
+    # Python 3
+    FileNotFoundError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+
 
 class HelpersTestCase(unittest.TestCase):
 

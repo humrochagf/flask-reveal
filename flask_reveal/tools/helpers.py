@@ -5,6 +5,13 @@ import shutil
 import tarfile
 import zipfile
 
+try:
+    # Python 3
+    FileNotFoundError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+
 
 def move_and_replace(src, dst):
     """

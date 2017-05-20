@@ -9,6 +9,17 @@ from flask_reveal.tools.cli import CLI
 from flask_reveal.tools.commands import (installreveal, load_subcomand,
                                          mkpresentation, start)
 
+try:
+    # Python 3
+    FileNotFoundError
+    FileExistsError
+    NotADirectoryError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+    FileExistsError = IOError
+    NotADirectoryError = IOError
+
 
 class CLITestCase(unittest.TestCase):
 

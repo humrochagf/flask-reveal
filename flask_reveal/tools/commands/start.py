@@ -5,6 +5,15 @@ import os
 
 from flask_reveal.app import FlaskReveal
 
+try:
+    # Python 3
+    FileNotFoundError
+    NotADirectoryError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+    NotADirectoryError = IOError
+
 
 class Start(argparse.ArgumentParser):
     info = ({

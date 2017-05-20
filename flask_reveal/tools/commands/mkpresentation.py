@@ -6,6 +6,12 @@ import shutil
 
 import flask_reveal.config as config
 
+try:
+    # Python 3
+    FileExistsError
+except NameError:
+    FileExistsError = IOError
+
 
 class MkPresentation(argparse.ArgumentParser):
     info = ({

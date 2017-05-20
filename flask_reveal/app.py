@@ -4,6 +4,13 @@ from flask import Flask
 
 from .blueprints.reveal import reveal_blueprint
 
+try:
+    # Python 3
+    FileNotFoundError
+except NameError:
+    # Python 2
+    FileNotFoundError = IOError
+
 
 class FlaskReveal(Flask):
     """
