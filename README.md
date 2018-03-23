@@ -13,22 +13,11 @@ The current version of flask-reveal runs on python 3.x
 
 ## Installation
 
-To install flask-reveal on your computer clone this repo:
+You can install it from the PyPI:
 
+```shell
+$ pip install flask-reveal
 ```
-git clone https://github.com/humrochagf/flask-reveal.git
-```
-
-Go to created folder and run:
-
-```
-python setup.py install
-```
-or if you are using makefiles :
-```
-make install
-```
-
 
 ## Usage
 
@@ -36,8 +25,8 @@ make install
 
 To start your presentation run:
 
-```
-flaskreveal start [-m=MEDIA | --media=MEDIA] [-d | --debug] PATH
+```shell
+$ flaskreveal start [-m=MEDIA | --media=MEDIA] [-d | --debug] PATH
 ```
 
 The `PATH` is the path to the markdown presentation file.
@@ -48,28 +37,28 @@ The `MEDIA` value sets custom media folder. If not passed, sets to default **img
 
 To create a new presentation run:
 
-```
-flaskreveal mkpresentation [NAME]
+```shell
+$ flaskreveal mkpresentation [NAME]
 ```
 
 ### Install/Update reveal.js files
 
 If you need for some reason reinstall reveal.js files, just run the following command:
 
-```
-flaskreveal installreveal
+```shell
+$ flaskreveal installreveal
 ```
 
 It will download reveal.js from a default **url** and make the install. If you want to set the **url** by yourself:
 
-```
-flaskreveal installreveal -u URL
+```shell
+$ flaskreveal installreveal -u URL
 ```
 
 If you already have the reveal.js file:
 
-```
-flaskreveal installreveal -f FILE
+```shell
+$ flaskreveal installreveal -f FILE
 ```
 
 Where the `FILE` can be either the **.tar.gz** or the **.zip** release file found at the [reveal.js releases](https://github.com/hakimel/reveal.js/releases).
@@ -92,13 +81,13 @@ Alternatively you can use the [decktape](https://github.com/astefanutti/decktape
 ### Share your presentation using [Ngrok](https://ngrok.com/)
 
 You can easily share your presentation using [Ngrok](https://ngrok.com/). Download it, and put the binary file at root. Then you can do :
-```sh
-ngrok http 5000
+```shell
+$ ngrok http 5000
 ```
 This assume `5000` is your localhost.
-`ngrok` will create a secure tunnel to your localhost : 
+`ngrok` will create a secure tunnel to your localhost :
 
-```sh
+```shell
 ngrok by @inconshreveable                                              (Ctrl+C to quit)
 
 Tunnel Status                 online
