@@ -1,9 +1,35 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+import re
 from subprocess import call
 
 from setuptools import find_packages, setup
 from setuptools.command.install import install
+
+try:
+    import pypandoc
+    readme = pypandoc.convert('README.md', 'rst')
+except (IOError, ImportError):
+    readme = ''
+
+# package variables
+package = 'flask_reveal'
+requirements = [
+    'Flask>=0.12',
+]
+test_requirements = [
+]
+
+# dynamic package info
+init_py = open(os.path.join(package, '__init__.py')).read()
+version = re.search(
+    "^__version__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
+author = re.search(
+    "^__author__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
+email = re.search(
+        "^__email__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
 
 
 class CustomInstall(install):
@@ -18,18 +44,17 @@ class CustomInstall(install):
 
 setup(
     name='flask-reveal',
-    version=__import__('flask_reveal').__version__,
+    version=version,
+    description='Make reveal.js presentations with Flask',
+    long_description=readme,
+    author=author,
+    author_email=email,
     url='https://github.com/humrochagf/flask-reveal',
     license='MIT',
-    author='Humberto Rocha Gonçalves Filho',
-    author_email='humrochagf@gmail.com',
-    description='Make reveal.js presentations with Flask',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        'Flask>=0.12',
-    ],
+    install_requires=requirements,
     entry_points=dict(
         console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
     cmdclass=dict(install=CustomInstall),
@@ -50,5 +75,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Topic :: Multimedia :: Graphics :: Presentation',
         'Topic :: Text Processing :: Markup :: HTML',
-    ]
+    ],
+    test_suite='tests',
+    tests_require=test_requirements
 )
