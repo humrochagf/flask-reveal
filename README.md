@@ -1,6 +1,11 @@
 # Flask Reveal
 
-[![Build Status](https://travis-ci.org/humrochagf/flask-reveal.svg?branch=master)](https://travis-ci.org/humrochagf/flask-reveal) [![Coverage Status](https://coveralls.io/repos/humrochagf/flask-reveal/badge.png?branch=master)](https://coveralls.io/r/humrochagf/flask-reveal?branch=master) [![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.png)](https://landscape.io/github/humrochagf/flask-reveal/master)
+![PyPI](https://img.shields.io/pypi/v/flask-reveal.svg)
+![PyPI - License](https://img.shields.io/pypi/l/flask-reveal.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flask-reveal.svg)
+![Travis branch](https://img.shields.io/travis/humrochagf/flask-reveal/master.svg)
+![Coveralls github branch](https://img.shields.io/coveralls/github/humrochagf/flask-reveal/master.svg)
+![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.png)
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
