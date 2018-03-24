@@ -6,12 +6,6 @@ import shutil
 
 import flask_reveal.config as config
 
-try:
-    # Python 3
-    FileExistsError
-except NameError:
-    FileExistsError = IOError
-
 
 class MkPresentation(argparse.ArgumentParser):
     info = ({
@@ -45,7 +39,7 @@ class MkPresentation(argparse.ArgumentParser):
                 f.write('# {0}\n\nStart from here!'.format(
                     presentation_name.replace('_', ' ').title()))
         else:
-            raise FileExistsError(
-                '{0} folder already exists'.format(self.path))
+            self.error('{0} folder already exists'.format(self.path))
+
 
 command = MkPresentation()

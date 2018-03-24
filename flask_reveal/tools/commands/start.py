@@ -3,16 +3,8 @@
 import argparse
 import os
 
+import flask_reveal
 from flask_reveal.app import FlaskReveal
-
-try:
-    # Python 3
-    FileNotFoundError
-    NotADirectoryError
-except NameError:
-    # Python 2
-    FileNotFoundError = IOError
-    NotADirectoryError = IOError
 
 
 class Start(argparse.ArgumentParser):
@@ -36,6 +28,10 @@ class Start(argparse.ArgumentParser):
     def parse_args(self, args=None, namespace=None):
         super(Start, self).parse_args(args, self)
 
+        if not os.path.exists(os.path.join(os.path.dirname(
+                flask_reveal.__file__), 'static/')):
+            self.error('You must run installreveal command first')
+
         # Check for presentation file
         if os.path.isfile(self.path):
             self.path = os.path.abspath(self.path)
@@ -58,13 +54,11 @@ class Start(argparse.ArgumentParser):
                           ' not found on current directory!')
                     print('Loading slides without custom configurations...')
             else:
-                raise NotADirectoryError(
+                self.error(
                     'your media path {0} is not a valid directory'.format(
                         self.media))
         else:
-            raise FileNotFoundError(
-                'presentation file {0} not found'.format(
-                    self.path))
+            self.error('presentation file {0} not found'.format(self.path))
 
     def run(self, args=None):
         self.parse_args(args)

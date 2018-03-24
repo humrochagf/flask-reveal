@@ -31,17 +31,6 @@ author = re.search(
 email = re.search(
         "^__email__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
 
-
-class CustomInstall(install):
-    """
-    Include reveal.js installation process
-    """
-    def run(self):
-        install.run(self)
-        # calling reveal installation
-        call(['flaskreveal', 'installreveal'], cwd=self.install_scripts)
-
-
 setup(
     name='flask-reveal',
     version=version,
@@ -57,7 +46,6 @@ setup(
     install_requires=requirements,
     entry_points=dict(
         console_scripts=['flaskreveal=flask_reveal.tools.cli:cli_execute']),
-    cmdclass=dict(install=CustomInstall),
     platforms='any',
     keywords=['flask', 'reveal.js', 'presentation'],
     classifiers=[

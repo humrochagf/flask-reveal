@@ -38,6 +38,8 @@ class InstallReveal(argparse.ArgumentParser):
     def run(self, args=None):
         self.parse_args(args)
 
+        print('Downloading reveal.js...')
+
         if self.url:
             try:
                 response = urlretrieve(self.url)
@@ -45,9 +47,14 @@ class InstallReveal(argparse.ArgumentParser):
             except Exception:
                 raise
 
+        print('Installing reveal.js...')
+
         move_and_replace(
             extract_file(self.path),
             os.path.join(os.path.dirname(flask_reveal.__file__), 'static/')
         )
+
+        print('Installation complete!')
+
 
 command = InstallReveal()

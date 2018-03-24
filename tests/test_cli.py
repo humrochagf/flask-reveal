@@ -9,17 +9,6 @@ from flask_reveal.tools.cli import CLI
 from flask_reveal.tools.commands import (installreveal, load_subcomand,
                                          mkpresentation, start)
 
-try:
-    # Python 3
-    FileNotFoundError
-    FileExistsError
-    NotADirectoryError
-except NameError:
-    # Python 2
-    FileNotFoundError = IOError
-    FileExistsError = IOError
-    NotADirectoryError = IOError
-
 
 class CLITestCase(unittest.TestCase):
 
@@ -77,11 +66,11 @@ class CommandsTestCase(unittest.TestCase):
                          os.path.join(self.project_dir, 'config.py'))
 
     def test_start_parse_args_invalid_img_root(self):
-        self.assertRaises(NotADirectoryError, self.start.parse_args,
+        self.assertRaises(SystemExit, self.start.parse_args,
                           [self.project_file, '-m invalid_media'])
 
     def test_start_parse_args_invalid_file(self):
-        self.assertRaises(FileNotFoundError, self.start.parse_args,
+        self.assertRaises(SystemExit, self.start.parse_args,
                           ['invalid_file', ])
 
     def test_install_reveal_parse_args(self):
@@ -98,5 +87,5 @@ class CommandsTestCase(unittest.TestCase):
         self.assertEqual(self.mk_presentation.path, 'my_presentation')
 
     def test_mk_presentation_run_directory_exists(self):
-        self.assertRaises(FileExistsError, self.mk_presentation.run,
+        self.assertRaises(SystemExit, self.mk_presentation.run,
                           [self.project_dir, ])
