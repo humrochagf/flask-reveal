@@ -83,7 +83,7 @@ class CommandsTestCase(unittest.TestCase):
         self.assertEqual(self.install_reveal.path, None)
         self.assertEqual(self.install_reveal.url,
                          'https://github.com/hakimel/reveal.js/' +
-                         'archive/3.5.0.tar.gz')
+                         'archive/3.6.0.tar.gz')
 
     def test_mk_presentation_parse_args(self):
         self.mk_presentation.parse_args([])
