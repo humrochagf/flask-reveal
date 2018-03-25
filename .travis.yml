@@ -4,11 +4,13 @@ python:
     - 3.3
     - 3.4
     - 3.5
+    - 3.6
 before_install:
     - pip install coveralls
 install:
     - pip install -e .
     - pip install coverage
+    - pip install mock
 script: nosetests -w tests --with-coverage --cover-package=flask_reveal
 after_success:
     - coveralls
