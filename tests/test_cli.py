@@ -5,6 +5,7 @@ import shutil
 import tempfile
 import unittest
 
+import mock
 from flask_reveal.tools.cli import CLI
 from flask_reveal.tools.commands import (installreveal, load_subcomand,
                                          mkpresentation, start)
@@ -56,7 +57,10 @@ class CommandsTestCase(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.project_dir)
 
-    def test_start_parse_args(self):
+    @mock.patch('flask_reveal.tools.commands.os.path.exists')
+    def test_start_parse_args(self, mock_exists):
+        mock_exists.return_value = True
+
         self.start.parse_args([self.project_file, ])
 
         self.assertEqual(self.start.path, self.project_file)

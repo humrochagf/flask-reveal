@@ -3,10 +3,8 @@
 
 import os
 import re
-from subprocess import call
 
 from setuptools import find_packages, setup
-from setuptools.command.install import install
 
 try:
     import pypandoc

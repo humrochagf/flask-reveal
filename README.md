@@ -1,11 +1,11 @@
 # Flask Reveal
 
-![PyPI](https://img.shields.io/pypi/v/flask-reveal.svg)
-![PyPI - License](https://img.shields.io/pypi/l/flask-reveal.svg)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flask-reveal.svg)
-![Travis branch](https://img.shields.io/travis/humrochagf/flask-reveal/master.svg)
-![Coveralls github branch](https://img.shields.io/coveralls/github/humrochagf/flask-reveal/master.svg)
-![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.png)
+[![PyPI](https://img.shields.io/pypi/v/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
+[![PyPI - License](https://img.shields.io/pypi/l/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
+[![Build Status](https://travis-ci.org/humrochagf/flask-reveal.svg?branch=master)](https://travis-ci.org/humrochagf/flask-reveal)
+[![Coverage Status](https://coveralls.io/repos/github/humrochagf/flask-reveal/badge.svg)](https://coveralls.io/github/humrochagf/flask-reveal)
+[![Code Health](https://landscape.io/github/humrochagf/flask-reveal/master/landscape.svg?style=flat)](https://landscape.io/github/humrochagf/flask-reveal/master)
 
 [flask-reveal](https://github.com/humrochagf/flask-reveal) is a cool way to setup your [reveal.js](https://github.com/hakimel/reveal.js) presentations without the need to edit a monolithic html file and using markdown syntax mixed with some html tags.
 
