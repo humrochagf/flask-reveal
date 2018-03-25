@@ -4,13 +4,6 @@ from flask import Flask
 
 from .blueprints.reveal import reveal_blueprint
 
-try:
-    # Python 3
-    FileNotFoundError
-except NameError:
-    # Python 2
-    FileNotFoundError = IOError
-
 
 class FlaskReveal(Flask):
     """
@@ -36,10 +29,7 @@ class FlaskReveal(Flask):
         self.config['MEDIA_ROOT'] = media_root
 
         if config:
-            try:
-                self.config.from_pyfile(config)
-            except FileNotFoundError:
-                raise
+            self.config.from_pyfile(config)
 
     def start(self, presentation_file, media_root, config=None, debug=False):
         """
@@ -49,9 +39,6 @@ class FlaskReveal(Flask):
         :param media_root: path to the media root
         :param debug: debug flag
         """
-        try:
-            self.load_user_config(presentation_file, media_root, config)
-        except FileNotFoundError:
-            raise
+        self.load_user_config(presentation_file, media_root, config)
 
         self.run(debug=debug)

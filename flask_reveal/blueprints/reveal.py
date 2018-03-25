@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import glob
-import os
 import re
 
 from flask import (Blueprint, current_app, render_template,
@@ -21,8 +19,8 @@ def load_markdown_slide(path, separator):
     :return: a list of strings with the slides content
     """
 
-    with open(path, 'r') as sb:
-        slides = sb.read()
+    with open(path, 'r') as slides_file:
+        slides = slides_file.read()
 
     return re.split('^{}$'.format(separator), slides, flags=re.MULTILINE)
 
