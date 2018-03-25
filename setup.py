@@ -18,6 +18,7 @@ requirements = [
     'Flask>=0.12',
 ]
 test_requirements = [
+    'mock==2.0.0'
 ]
 
 # dynamic package info
@@ -27,7 +28,7 @@ version = re.search(
 author = re.search(
     "^__author__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
 email = re.search(
-        "^__email__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
+    "^__email__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
 
 setup(
     name='flask-reveal',
