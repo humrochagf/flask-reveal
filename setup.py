@@ -38,7 +38,7 @@ setup(
     version=VERSION,
     description='Make reveal.js presentations with Flask',
     long_description=README,
-    long_description_content_type='text/markdown; charset=UTF-8',
+    long_description_content_type='text/markdown',
     author=AUTHOR,
     author_email=EMAIL,
     url='https://github.com/humrochagf/flask-reveal',
