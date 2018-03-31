@@ -1,4 +1,4 @@
-# Flask Reveal
+# Flask Reveal (DEPRECATED)
 
 [![PyPI](https://img.shields.io/pypi/v/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
 [![PyPI - License](https://img.shields.io/pypi/l/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
