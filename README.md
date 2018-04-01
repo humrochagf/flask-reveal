@@ -1,5 +1,7 @@
 # Flask Reveal (DEPRECATED)
 
+This project was deprecated in favor of its sucessor [revelation](https://github.com/humrochagf/revelation). Now without flask but using its solid roots and with a more clean and organized architecture.
+
 [![PyPI](https://img.shields.io/pypi/v/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
 [![PyPI - License](https://img.shields.io/pypi/l/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flask-reveal.svg)](https://pypi.org/project/flask-reveal/)
